@@ -1,0 +1,188 @@
+
+TAGA_DIR=~/scripts/taga
+source $TAGA_DIR/config
+
+echo $0 executing at `date`
+
+###############################
+# Init Part
+###############################
+
+# Set MYPORT
+let i=0
+let MYPORT=$PORTBASE
+for target in $targetList
+do
+  let i=$i+1
+  if [ $target == $MYIP ]; then
+    let MYPORT=$MYPORT+$i
+  fi 
+done
+
+###############################
+# Server (Traffic Receiver) Part
+###############################
+
+# Start Server
+
+if $TAGA_DIR/hostList.sh | grep `hostname` >/dev/null ; then
+  if [ $TESTTYPE == "MCAST" ]; then
+
+    # prep the mgen config 
+    sed -e s/mcastgroup/$MYMCAST_ADDR/g $TAGA_DIR/script_mcast_rcvr.mgn.template \
+            > $TAGA_DIR/script_mcast_rcvr.mgn.temp # create temp from template
+
+    # move temp2 to the script_mcast_rcvr.mgn
+    mv $TAGA_DIR/script_mcast_rcvr.mgn.temp  $TAGA_DIR/script_mcast_rcvr.mgn
+    
+    # run it, joing the group
+    mgen input  $TAGA_DIR/script_mcast_rcvr.mgn #&
+
+    # start the UDP listener in background
+    echo mgen port $MYMCAST_PORT 
+    mgen port $MYMCAST_PORT &
+  else
+    # start the UDP listener in background
+    mgen port $MYPORT & 
+  fi
+else
+  echo `hostname` is not in the list of PLI Receivers | tee $STATUS_FILE
+  echo $0 Exiting with no action | tee $STATUS_FILE
+  exit
+fi
+
+sleep $SERVER_INIT_DELAY
+
+###############################
+# Traffic Generation (Client) Part
+###############################
+
+# reinit port-related vars
+let i=0
+
+# Start Traffic to other Nodes
+
+# use the activated flag to stagger starts and ensure only one effective loop out of the two below
+let activated=0
+
+###############################
+# MCAST processing (if testtype == MCAST)
+###############################
+
+if [ $TESTTYPE == "MCAST" ]; then
+  
+  let i=$i+1
+
+  let DESTPORT=$MYMCAST_PORT
+  target=$MYMCAST_ADDR
+  
+  # prep the mgen config 
+  sed -e s/destination/$target/g $TAGA_DIR/script.mgn.template > $TAGA_DIR/script.mgn.temp # create temp from template
+  sed -e s/destport/$DESTPORT/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn.temp2  # toggle temp/temp2
+  sed -e s/sourceport/$SOURCEPORT/g $TAGA_DIR/script.mgn.temp2 > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
+  sed -e s/count/$MSGCOUNT/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn.temp2  # toggle temp/temp2
+  sed -e s/rate/$MSGRATE/g $TAGA_DIR/script.mgn.temp2 > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
+  sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn       # finalize
+
+  # some cleanup
+  rm $TAGA_DIR/script.mgn.temp $TAGA_DIR/script.mgn.temp2
+
+  echo ---------------------
+  cat $TAGA_DIR/script.mgn
+  echo ---------------------
+  mgen input $TAGA_DIR/script.mgn
+  
+  # we are done, exit the script
+  exit
+
+fi # if multicast flag is true
+
+
+###############################
+# UCAST processing (if testtype == UCAST)
+###############################
+
+###############################
+# First Half of UCAST Loop
+###############################
+for target in $targetList
+do
+  
+  let i=$i+1
+
+  if [ $target == $MYIP ]; then
+    #echo target is MYIP , skipping self... 
+    let activated=1
+    continue
+  fi
+
+  # use the activated flag to stagger starts and ensure only one effective loop out of the two loops
+  # if not activated, continue to top
+  if [ $activated -eq 0 ]; then
+    continue
+  fi
+
+  let DESTPORT=$PORTBASE+$i
+
+  # prep the mgen config 
+  sed -e s/destination/$target/g $TAGA_DIR/script.mgn.template > $TAGA_DIR/script.mgn.temp # create temp from template
+  sed -e s/destport/$DESTPORT/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn.temp2  # toggle temp/temp2
+  sed -e s/sourceport/$SOURCEPORT/g $TAGA_DIR/script.mgn.temp2 > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
+  sed -e s/count/$MSGCOUNT/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn.temp2  # toggle temp/temp2
+  sed -e s/rate/$MSGRATE/g $TAGA_DIR/script.mgn.temp2 > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
+  sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn       # finalize
+
+  # some cleanup
+  rm $TAGA_DIR/script.mgn.temp $TAGA_DIR/script.mgn.temp2
+
+  echo ---------------------
+  cat $TAGA_DIR/script.mgn
+  echo ---------------------
+  mgen input $TAGA_DIR/script.mgn
+
+done
+
+###############################
+# Second Half of UCAST Loop
+###############################
+# reinit port-related vars
+let i=0
+# actiivated flag is okay
+
+for target in $targetList
+do
+  
+  let i=$i+1
+
+  if [ $target == $MYIP ]; then
+    #echo target is MYIP , skipping self... 
+    let activated=0
+    continue
+  fi
+
+  # use the activated flag to stagger starts and ensure only one effective loop out of the two loops
+  # if not activated, continue to top
+  if [ $activated -eq 0 ]; then
+    continue
+  fi
+
+  let DESTPORT=$PORTBASE+$i
+  
+  # prep the mgen config 
+  sed -e s/destination/$target/g $TAGA_DIR/script.mgn.template > $TAGA_DIR/script.mgn.temp # create temp from template
+  sed -e s/destport/$DESTPORT/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn.temp2  # toggle temp/temp2
+  sed -e s/sourceport/$SOURCEPORT/g $TAGA_DIR/script.mgn.temp2 > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
+  sed -e s/count/$MSGCOUNT/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn.temp2  # toggle temp/temp2
+  sed -e s/rate/$MSGRATE/g $TAGA_DIR/script.mgn.temp2 > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
+  sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp > $TAGA_DIR/script.mgn       # finalize
+
+  # some cleanup
+  rm $TAGA_DIR/script.mgn.temp $TAGA_DIR/script.mgn.temp2
+
+  echo ---------------------
+  cat $TAGA_DIR/script.mgn
+  echo ---------------------
+  mgen input $TAGA_DIR/script.mgn
+
+done
+
