@@ -2,6 +2,16 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
+# get the md5sum of the config so we know if it changes
+configMd5sum=`md5sum $TAGA_DIR/config | cut -d" " -f 1`
+
+# set the flag to enter the loop
+let configChanged=1
+
+# loop while config continues to change
+while [ $configChanged -eq 1 ]
+do
+
 for target in $targetList
 do
    # reinit
@@ -14,6 +24,14 @@ do
 
    # resource the config in case the strict flag or other config is modified
    source $TAGA_DIR/config
+
+   # make sure this target is still in the list
+   if echo $targetList | grep $target ; then
+      echo Target is still in the list >/dev/null
+   else
+      echo Target List has changed, $target no longer valid target.
+      break
+   fi
 
    echo
    echo $0 checking $target
@@ -123,6 +141,18 @@ do
    # while not valid
    done
 
-done
-echo
+done # end targetList
+
+configMd5sum2=`md5sum $TAGA_DIR/config | cut -d" " -f 1`
+
+#echo checking ......................
+#echo $configMd5sum 
+#echo $configMd5sum2 
+#echo checking ......................
+
+if [ $configMd5sum == $configMd5sum2 ]; then
+  let configChanged=0
+fi
+
+done  # end while
 
