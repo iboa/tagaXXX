@@ -1,5 +1,11 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
-Features:
+=============================
+TAGA Features:
+=============================
 
   Deployment:
   -----------
@@ -11,8 +17,9 @@ Features:
   1. Auto Configuration of Interface Names (via targetList)
   2. Auto Configuration of Host Names (via targetList)
   3. Auto Network Node Time Synchronization Verification
-  4. Auto Collection and Cleanup
-  5. Augo Generation of Analytical Artifacts
+  4. Auto Distribution of (updates to) Configuration
+  5. Auto File Collection and Process Cleanup
+  6. Auto Generation of Analytical Artifacts
 
   Extendability:
   -----------
@@ -23,6 +30,9 @@ Features:
   -----------
   1. TAGA 'Run and Mon' Utility scales automatically based on target list update 
   2. Tunable Display based on scalability requirements
+  3. Round-robin and staggered starts help avoid traffic overload during large network tests
+  4. TAGA Utility scales nicely with configuration changes limited to two primary configuration 
+     files (config targetList.sh) and a few key params (timer delays, traffic rates/counts, etc)
 
   Enh
 
@@ -30,10 +40,10 @@ Features:
   -----------
   1. Basic Network Health Check at a single commmand (run or mon)
   2. Tailorability of Displays
-  3. Standardized INFO, WARN, and ALARM tags simplify filtering (* Note1)
+  3. Standardized INFO, WARN, and ALARM tags simplify filtering (Note1)
   4. "Go Remote" "Probe" "Prep" "TimeTimer" and other time saving utilities
   5. Human Readable and Tailorable Timestamps
-  6. Multiple Interfaces per Host supported (* Note1)
+  6. Multiple Interfaces per Host supported (Note1)
 
   Other:
   -----------
@@ -46,4 +56,21 @@ Features:
   2. TBD
 
 
-* Note1: initial/partial support only
+
+=============================
+TAGA System Requirements:
+=============================
+
+1. Linux-like operating environment
+2. Bash or equivalent shell (for full capabilities)
+3. libssh (ssh)
+4. libpcap (tcpdump)
+5. mgen, iperf, or similar traffic generation engines
+
+
+---------
+NOTES:
+---------
+Note1: Initial/Partial Support Only
+
+
