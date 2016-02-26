@@ -32,9 +32,7 @@ TAGA Features:
   2. Tunable Display based on scalability requirements
   3. Round-robin and staggered starts help avoid traffic overload during large network tests
   4. TAGA Utility scales nicely with configuration changes limited to two primary configuration 
-     files (config targetList.sh) and a few key params (timer delays, traffic rates/counts, etc)
-
-  Enh
+     files (config, targetList.sh) and a few key params (timer delays, traffic rates/counts, etc)
 
   Ease of Use:
   -----------
@@ -53,8 +51,7 @@ TAGA Features:
           - smart aliases allow for more work at the end of the day and reduce cycle times 
       - enables fast filter creation for enhanced data analysis
       - fosters teamwork, collaboration, and communication
-  2. TBD
-
+  2. Sample Filters and other extensions available upon request to info@iboa.us
 
 
 =============================
@@ -72,5 +69,4 @@ TAGA System Requirements:
 NOTES:
 ---------
 Note1: Initial/Partial Support Only
-
 
