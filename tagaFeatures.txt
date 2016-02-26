@@ -10,24 +10,30 @@ Features:
   -----------
   1. Auto Configuration of Interface Names (via targetList)
   2. Auto Configuration of Host Names (via targetList)
-  3. Auto Time Synchronization
+  3. Auto Network Node Time Synchronization Verification
   4. Auto Collection and Cleanup
   5. Augo Generation of Analytical Artifacts
 
   Extendability:
   -----------
   1. Start of Test (Traffic), Middle of Test (Traffic), and End of Run Test (Traffic) Test Shells Provided
-  2. TBD
+  2. TAGA Provided Samples include Pub/Sub implementation and File Input/output in Python and C languages 
 
   Scalability:
   -----------
-  1. Tunable Display based on scalability requirements
-  2. TBD
+  1. TAGA 'Run and Mon' Utility scales automatically based on target list update 
+  2. Tunable Display based on scalability requirements
+
+  Enh
 
   Ease of Use:
   -----------
-  1. "Go Remote" "Probe" "Prep" "TimeTimer" and other time saving utilities
-  2. Human Readable and Tailorable Timestamps
+  1. Basic Network Health Check at a single commmand (run or mon)
+  2. Tailorability of Displays
+  3. Standardized INFO, WARN, and ALARM tags simplify filtering (* Note1)
+  4. "Go Remote" "Probe" "Prep" "TimeTimer" and other time saving utilities
+  5. Human Readable and Tailorable Timestamps
+  6. Multiple Interfaces per Host supported (* Note1)
 
   Other:
   -----------
@@ -40,3 +46,4 @@ Features:
   2. TBD
 
 
+* Note1: initial/partial support only
