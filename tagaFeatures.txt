@@ -24,10 +24,19 @@ Features:
   1. Tunable Display based on scalability requirements
   2. TBD
 
+  Ease of Use:
+  -----------
+  1. "Go Remote" "Probe" "Prep" "TimeTimer" and other time saving utilities
+  2. Human Readable and Tailorable Timestamps
+
   Other:
   -----------
-  1. IBOA Auto Alias Utility (enables fast filter creation for enhanced data analysis)
+  1. IBOA Auto Alias Utility is bundled with the TAGA Framework Release
+      - enables fast and automatic creation of individual and group (team) specialized aliases
+          - smart aliases increase workflow and productivity by reducing keystrokes and input errors
+          - smart aliases allow for more work at the end of the day and reduce cycle times 
+      - enables fast filter creation for enhanced data analysis
+      - fosters teamwork, collaboration, and communication
   2. TBD
-
 
 
