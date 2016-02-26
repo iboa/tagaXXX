@@ -1,0 +1,33 @@
+
+Features:
+
+  Deployment:
+  -----------
+  1. Auto Self Replication
+  2. Auto Key Generation and Distribution
+
+  Run-time:
+  -----------
+  1. Auto Configuration of Interface Names (via targetList)
+  2. Auto Configuration of Host Names (via targetList)
+  3. Auto Time Synchronization
+  4. Auto Collection and Cleanup
+  5. Augo Generation of Analytical Artifacts
+
+  Extendability:
+  -----------
+  1. Start of Test (Traffic), Middle of Test (Traffic), and End of Run Test (Traffic) Test Shells Provided
+  2. TBD
+
+  Scalability:
+  -----------
+  1. Tunable Display based on scalability requirements
+  2. TBD
+
+  Other:
+  -----------
+  1. IBOA Auto Alias Utility (enables fast filter creation for enhanced data analysis)
+  2. TBD
+
+
+
