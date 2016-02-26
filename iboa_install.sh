@@ -1,6 +1,7 @@
-#
-# Copyright (c) 2016 IBOA Inc., All Rights Reserved
-#
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 # install iboa if not already installed
 if cat ~/.bashrc | grep iboa | grep bashrc >/dev/null; then

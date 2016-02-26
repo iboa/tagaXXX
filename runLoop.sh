@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -8,7 +12,10 @@ source $TAGA_DIR/config
 #########################################
 cat $TAGA_DIR/config | sed -e s/^MASTER=.*$//g |     \
       sed -e :a -e '/./,$!d;/^\n*$/{$d;N;;};/\n$/ba' \
-           > $TAGA_DIR/tmp.config; mv $TAGA_DIR/tmp.config $TAGA_DIR/config
+           > $TAGA_DIR/tmp.config
+
+# move temp to config
+mv $TAGA_DIR/tmp.config $TAGA_DIR/config
 
 # Update the MASTER entry in the config
 echo MASTER=$MYIP >> $TAGA_DIR/config
@@ -41,6 +48,12 @@ if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
 fi
 sleep 1
 
+# get ping times if enabled
+if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
+  ./pingTimes.sh
+fi
+sleep 1
+
 # stop the Simulation Always 
 if [ true ] ; then
 #if [ $STOP_SIMULATION -eq 1 ] ; then
@@ -66,11 +79,19 @@ do
    fi
    sleep 1
 
+   # get ping times if enabled
+   if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
+     ./pingTimes.sh
+   fi
+   sleep 1
+
+   # new 15 jan 2016
    # Update the MASTER entry in the config
    # strip old MASTER entries and blank lines at end of file
-   cat $TAGA_DIR/config | sed -e s/^MASTER=.*$//g | \
-      sed -e :a -e '/./,$!d;/^\n*$/{$d;N;;};/\n$/ba' \
-           > $TAGA_DIR/tmp.config; mv $TAGA_DIR/tmp.config $TAGA_DIR/config
+   cat $TAGA_DIR/config | sed -e s/^MASTER=.*$//g |     \
+         sed -e :a -e '/./,$!d;/^\n*$/{$d;N;;};/\n$/ba' \
+             > $TAGA_DIR/tmp.config
+   mv $TAGA_DIR/tmp.config $TAGA_DIR/config
 
    # Update the MASTER entry in the config
    echo MASTER=$MYIP >> $TAGA_DIR/config
@@ -144,13 +165,13 @@ do
 
    # Start of cycle tests
    sleep $SERVER_INIT_DELAY
+
    ./startOfCycleTests.sh & # run in background/parallel
 
    let i=$DURATION1
    while [ $i -gt 0 ]
    do
       let tot=$DURATION2+$i
-      #echo Seconds remaining Part 1: $i, Seconds remaining Total: $tot
       echo Total Secs Remain: $tot : Secs Remain Part 1: $i
       sleep 1
       let i=$i-1
@@ -180,11 +201,11 @@ do
    #####################################################
    # Client-Side Specialized Test Stimulations
    #####################################################
- 
+
    if [ $XXX_ON -eq 1 ]; then
      ./testXXX.sh
    fi
-
+ 
    sleep 5
 
    # stop the Simulation each iteration 

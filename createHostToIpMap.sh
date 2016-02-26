@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -17,10 +21,7 @@ do
    targethostname=`ssh -l $MYLOGIN_ID $target hostname` 
    echo $target $targethostname
    echo $targethostname >> /$TAGA_DIR/hostList.txt
-   echo $target $targethostname >> /$TAGA_DIR/hostsToIps.txt
+   echo $target.$targethostname >> /$TAGA_DIR/hostsToIps.txt
 
 done
-
-exit
-
 

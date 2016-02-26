@@ -10,19 +10,51 @@ hostList=`$TAGA_DIR/hostList.sh`
 MYLOGIN_ID=yourLoginIdGoesHere
 MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
-DAEMON1_IP="192.168.43.69"
-DAEMON2_IP="10.0.0.22"
-OLDPROCFILE1="/tmp/socketfileXXX.sock"
-OLDPROCFILE2="/home/$MYLOGIN_ID/commandXXX.pid"
-OLDPROCFILE3="/home/$MYLOGIN_ID/python/python.pid"
-OLDSOCKPROCFILE1="/tmp/sockeetfile.sock"
-OLDSOCKPROCFILE2="/home/$MYLOGIN_ID/yourprimarycommand.pid"
+PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
+
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+# dlm temp remove all the dlm temp things before commiting to git hub!!
+
+# dlm temp  TESTING REMOVE after TEST
+#PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
+# dlm temp change PROTO to below in code
+PROTO_UNDER_TEST="RESTCONF" # (Normal1)
+PROTO="RESTCONF_FORCE" # (Testing1)
+PROTO="NETCONF_FORCE" # (Testing2)
+PROTO="NETCONF" # (Normal2)
+PROTO="RESTCONF" # (Normal1)
+MYLOGIN_ID=darrin
+MYPASSWD=roller123
+COMMAND=yangcli-pro
+OLDPROCFILE3="/home/darrin/python/python.pid"
+# dlm temp end TESTING REMOVE after TEST
 
 ####################################################
 # Time Synch Strict Flag
 ####################################################
-STRICT_TIME_SYNCH=0
-STRICT_TIME_SYNCH=1
+# verify time synch?
+TIME_SYNCH_CHECK_ENABLED=0 # (Testing)
+TIME_SYNCH_CHECK_ENABLED=1 # (Normal)
+
+# strict time synch?
+STRICT_TIME_SYNCH=0 # (Testing)
+STRICT_TIME_SYNCH=1 # (Normal)
+
+# get ping times?
+PING_TIME_CHECK_ENABLED=1 # (Testing)
+PING_TIME_CHECK_ENABLED=0 # (Normal)
 
 ####################################################
 # Enable or Disable all testing per iteration loop
@@ -30,21 +62,31 @@ STRICT_TIME_SYNCH=1
 ALL_TESTS_DISABLED=1 # disable all tests (Testing)
 ALL_TESTS_DISABLED=0 # enable all tests (Normal)
 
-MAX_ENVIRON_SIM_LOOPS=2 # simulated ENVIRON environ
-MAX_ENVIRON_SIM_LOOPS=1 # simulated ENVIRON environ
-MAX_ENVIRON_SIM_LOOPS=0 # simulated ENVIRON environ (Normal)
-ENVIRON_SIMULATION=1 # simulated ENVIRON environ (Normal)/(Testing)
-ENVIRON_SIMULATION=0 # simulated ENVIRON environ (Normal)
+##############################################
+# ENVIRON SIMULATION SWITCHES
+##############################################
+# dlm temp 
+MAX_ENVIRON_SIM_LOOPS=2 # simulated ENVIRON MANET environ
+MAX_ENVIRON_SIM_LOOPS=1 # simulated ENVIRON MANET environ
+MAX_ENVIRON_SIM_LOOPS=0 # simulated ENVIRON MANET environ (Normal)
+ENVIRON_SIMULATION=1 # simulated ENVIRON MANET environ (Normal)/(Testing)
+ENVIRON_SIMULATION=0 # simulated ENVIRON MANET environ (Normal)
+# dlm temp end
 
 ##############################################
 # Simulation Server Config Follows
 ##############################################
-# Primary Sim Servers 
-PRIMARY_SIM_SERVER_ON=0 # (Testing)
-PRIMARY_SIM_SERVER_ON=1 # (Normal)
+# dlm temp 
+#PRIMARY_SIM_SERVER=netconfd-pro
+#PRIMARY_SIM_CLIENT=yangcli-pro
+# dlm temp end
 
-START_SIMULATION=0 # Do Not Start Specialized Simulation Servers (Normal)
+# Primary Sim Servers (netconfd-pro)
+PRIMARY_SIM_SERVER_ON=1 # (Old Normal)
+PRIMARY_SIM_SERVER_ON=0 # (Normal) # this is now a daemon
+
 START_SIMULATION=1 # Start Specialized Simulation Servers (Testing)
+START_SIMULATION=0 # Do Not Start Specialized Simulation Servers (Normal)
 
 STOP_SIMULATION=0 # Do Not Stop Primary and Specialized Simulation Servers (Testing)
 STOP_SIMULATION=1 # Stop Primary and Specialized Simulation Servers (Normal)
@@ -56,12 +98,30 @@ SIMULATION_ONLY=1 # simulation only flag (1 disables traffic) (Testing)
 SIMULATION_ONLY=0 # simulation only flag (0 enables traffic) (Normal)
 
 # Max output (enable this output if using the simulations below)
-MAX_OUTPUT_ENABLED=0 # (Normal)
 MAX_OUTPUT_ENABLED=1 # (Testing)
+MAX_OUTPUT_ENABLED=0 # (Normal)
 
 # XXX Stimulation
 XXX_ON=1 # (Testing)
 XXX_ON=0 # (Normal)
+
+# RDR Stimulation
+RDR_ON=1 # (Testing)
+RDR_ON=0 # (Normal)
+
+# LDR Stimulation
+LDR_ON=1 # (Testing)
+LDR_ON=0 # (Normal)
+
+# HLS Stimulation
+HLS_ON=1 # (Testing)
+HLS_ON=0 # (Normal)
+
+# dlm temp 
+# JTX Stimulation
+JTX_ON=1 # (Testing)
+JTX_ON=0 # (Normal)
+# dlm temp end
 
 # XXXX simulators on/off flags
 DEVICE1=1 
@@ -69,6 +129,30 @@ DEVICE2=1
 DEVICE3=1
 DEVICE4=0 
 DEVICE5=0
+
+# dlm temp 
+# XXXX simulators on/off flags
+# XXXX simulators on/off flags
+#DEVICE1=1 
+#DEVICE2=1 
+#DEVICE3=1
+#DEVICE4=0 
+#DEVICE5=0
+SENSOR_ON=1 
+RADIO_ON=1 
+JAMMER_ON=1
+MCA_ON=0 
+NMS_ON=0
+# dlm temp end
+
+
+# dlm temp 
+##############################################
+# YW Remote Server Testing
+##############################################
+YW_ON=1 # (Testing)
+YW_ON=0 # (Normal)
+# dlm temp end
 
 ##############################################
 # End of Server Config 
@@ -78,35 +162,48 @@ DEVICE5=0
 # Begin of Client Config 
 ##############################################
 
+# dlm temp 
 ##############################################
 # Start of Cycle Testing (yangcli-pro client)
 ##############################################
-START_OF_CYCLE_TESTS_ENABLED=1
-START_OF_CYCLE_TESTS_ENABLED=0
+START_OF_CYCLE_TESTS_ENABLED=1 # Testing
+START_OF_CYCLE_TESTS_ENABLED=0 # Normal
 
 ##############################################
 # Mid Cycle Testing (yangcli-pro client)
 ##############################################
-MID_CYCLE_TESTS_ENABLED=1
-MID_CYCLE_TESTS_ENABLED=0
+MID_CYCLE_TESTS_ENABLED=1 # Testing
+MID_CYCLE_TESTS_ENABLED=0 # Normal
 
 ##############################################
 # End of Cycle Testing (yangcli-pro client)
 ##############################################
-END_OF_CYCLE_TESTS_ENABLED=1
-END_OF_CYCLE_TESTS_ENABLED=0
+# dlm temp end
 
-END_OF_CYCLE_TESTS2_ENABLED=1
-END_OF_CYCLE_TESTS2_ENABLED=0
+END_OF_CYCLE_TESTS_ENABLED=1 # Testing
+END_OF_CYCLE_TESTS_ENABLED=0 # Normal
 
-END_OF_CYCLE_TESTS3_ENABLED=1
-END_OF_CYCLE_TESTS3_ENABLED=0
+END_OF_CYCLE_TESTS2_ENABLED=1 # Testing
+END_OF_CYCLE_TESTS2_ENABLED=0 # Normal
+
+END_OF_CYCLE_TESTS3_ENABLED=1 # Testing
+END_OF_CYCLE_TESTS3_ENABLED=0 # Normal
+
+
+# dlm temp 
+##############################################
+# All or None OVERRIDE ALL OF TEST CONFIG Above IS HERE!!
+##############################################
+#END_OF_CYCLE_TESTS_ENABLED=0
+#MID_CYCLE_TESTS_ENABLED=$END_OF_CYCLE_TESTS_ENABLED
+#START_OF_CYCLE_TESTS_ENABLED=$END_OF_CYCLE_TESTS_ENABLED
+# dlm temp end
 
 ##############################################
 # additional admin/cleanup
 ##############################################
-EXTRA_FILE_CLEANUP_ENABLED=1 # 
-EXTRA_FILE_CLEANUP_ENABLED=0 #
+EXTRA_FILE_CLEANUP_ENABLED=1 # Testing 
+EXTRA_FILE_CLEANUP_ENABLED=0 # Normal
 
 ##############################################
 # Do this up top and in this order to avoid dependency loop
@@ -124,14 +221,37 @@ source $TAGA_DIR/targetList.sh   > /dev/null # for NETADDRPART
 # manually generated configs
 ##############################################
 DURATION1=20
+DURATION1=10
 DURATION2=10
+DURATION1=5
+DURATION2=5
+DURATION1=20
+DURATION2=20
 
 SERVER_INIT_DELAY=10
 SERVER_INIT_DELAY=20
+SERVER_INIT_DELAY=10
+SERVER_INIT_DELAY=5
+SERVER_INIT_DELAY=10
 
+MSGCOUNT=3
+MSGCOUNT=5
+MSGCOUNT=10000
 MSGCOUNT=1000
+MSGCOUNT=1000
+MSGCOUNT=100
+MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=5   # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=500 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=10 # 5 for five per second, 0.2 for each 5 seconds
 MSGLEN=1200
+
+# try to disable traffic (MSGCOUNT == 0 does not work!)
+#MSGRATE=0.0 
+#MSGCOUNT=0
 
 ####################################################
 # Test type - Multicast or Unicast
@@ -164,17 +284,24 @@ CONTINUOUS_SYNCH=0  # synch config only
 INTERFACE=wlan0
 INTERFACE=`ifconfig | grep ^w | head -n 1 | cut -d" " -f1`
 INTERFACE=`ifconfig | grep $NETADDRPART -B1 | head -n 1 | cut -d" " -f1`
+#echo $INTERFACE
 
 ##############################################
 # automatatically generated configs
 ##############################################
+SCRIPTS_DIR=$HOME/scripts
+TAGA_DIR=$SCRIPTS_DIR/taga
 OUTPUT_DIR=$SCRIPTS_DIR/taga/output
 hostList=`$TAGA_DIR/hostList.sh`
 touch $TAGA_DIR/hostList.sh
 MY_NODE=`/sbin/ifconfig | grep $NETADDRPART | cut -d: -f 2 | cut -d. -f 3`
+# default to localhost
+MYIP=localhost
 # determine MYIP from candidates list
 MYIPCANDIDATES=`/sbin/ifconfig | grep $NETADDRPART | cut -d: -f 2 | cut -d" " -f 1`
-for ip in $MYIPCANDIDATES; do if echo $targetList | grep $ip >/dev/null ; then MYIP=$ip; break; fi; done
+for ip in $MYIPCANDIDATES; do if echo $targetList | grep $ip >/dev/null ; then MYIP=$ip; break; else MYIP=localhost; fi; done
+#echo CANDIDATES: $MYIPCANDIDATES
+#echo MYIP: $MYIP
 
 ##############################################
 # others / static constants
@@ -182,13 +309,11 @@ for ip in $MYIPCANDIDATES; do if echo $targetList | grep $ip >/dev/null ; then M
 
 ##############################################
 STATUS_FILE="/tmp/taga_status.txt"
+TEST_DESCRIPTION="taga_anycast"
 
-# verify time synch?
-TIME_SYNCH_CHECK_ENABLED=0
-TIME_SYNCH_CHECK_ENABLED=1
 
 ##############################################
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=10.0.0.18
+MASTER=192.168.43.6

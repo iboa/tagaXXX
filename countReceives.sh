@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -20,7 +24,6 @@ cd $outputDir
 ##################################################################
 # PRINT HEADER ROWS
 ##################################################################
-
 $TAGA_DIR/printReceiversHeader.sh RECEIVERS $iter $startTime $startDTG
 
 ###################
@@ -69,8 +72,8 @@ do
 
       # else get the count for this target
 
-      HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target2 | cut -d" " -f 2`
-      DEST_FILE_TAG=taga_ucast_$HOST\_
+      HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target2\\\. | cut -d"." -f 5`
+      DEST_FILE_TAG=$TEST_DESCRIPTION\_$HOST\_*$target2\_
 
       # write to the curcount.txt file
       cat $DEST_FILE_TAG* > /tmp/curcount.txt 2>/dev/null
@@ -80,14 +83,13 @@ do
         # MCAST
         cat /tmp/curcount.txt  | grep "length $MSGLEN" > /tmp/curcount2.txt # verify length
         cat /tmp/curcount2.txt | cut -d">" -f 1       > /tmp/curcount.txt  # get senders only
-        #cat /tmp/curcount.txt  | grep -v $target.$SOURCEPORT > /tmp/curcount2.txt # filter on the target (row)
         cat /tmp/curcount.txt  | grep $target\.      > /tmp/curcount2.txt # filter on the target (row)
         cat /tmp/curcount2.txt | wc -l                > /tmp/curcount.txt  # get the count
       else
         # UCAST
         cat /tmp/curcount.txt  | grep "length $MSGLEN" > /tmp/curcount2.txt # verify length
         cat /tmp/curcount2.txt | cut -d">" -f 1       > /tmp/curcount.txt  # get senders only
-        cat /tmp/curcount.txt  | grep $target\.      > /tmp/curcount2.txt # filter on the target (row)
+        cat /tmp/curcount.txt  | grep $target\\\.      > /tmp/curcount2.txt # filter on the target (row)
         cat /tmp/curcount2.txt | wc -l                > /tmp/curcount.txt  # get the count
       fi
 
@@ -125,13 +127,9 @@ do
 
   done # continue to next target
 
-
   echo $row
   echo $row >> $TAGA_DIR/counts.txt
   echo $row >> $TAGA_DIR/countsReceives.txt
 
-
 done
-
 echo
-

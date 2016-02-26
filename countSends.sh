@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -19,7 +23,6 @@ cd $outputDir
 ##################################################################
 # PRINT HEADER ROWS
 ##################################################################
-
 $TAGA_DIR/printSendersHeader.sh "SENDERS" $iter $startTime $startDTG
 
 ###################
@@ -65,15 +68,15 @@ do
     else
 
       # else get the count for this target
-      HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target | cut -d" " -f 2`
-      SOURCE_FILE_TAG=taga_ucast_$HOST\_
+      HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target\\\. | cut -d"." -f 5`
+      SOURCE_FILE_TAG=$TEST_DESCRIPTION\_$HOST\_*$target\_
 
       # make sure we are starting with empty files
-      rm /tmp/curcount.txt /tmp/curcount2.txt
+      rm /tmp/curcount.txt /tmp/curcount2.txt 2>/dev/null
       touch /tmp/curcount.txt /tmp/curcount2.txt
       
       # write to the curcount.txt file
-      cat $SOURCE_FILE_TAG* > /tmp/curcount.txt 2>/dev/null
+      cat $SOURCE_FILE_TAG* | grep $target\\\. > /tmp/curcount.txt 2>/dev/null
 
       # mcast or ucast? 
       if [ $TESTTYPE == "MCAST" ]; then
@@ -86,7 +89,7 @@ do
       else
         # UCAST
         cat /tmp/curcount.txt  | cut -d">" -f 2-      > /tmp/curcount2.txt  # get receivers only
-        cat /tmp/curcount2.txt | grep $target2\.      > /tmp/curcount.txt   # remove all except target2 rows
+        cat /tmp/curcount2.txt | grep $target2\\\.      > /tmp/curcount.txt   # remove all except target2 rows
         cat /tmp/curcount.txt  | grep "length $MSGLEN" > /tmp/curcount2.txt  # verify length
         cat /tmp/curcount2.txt | wc -l                > /tmp/curcount.txt   # get the count
       fi
@@ -113,7 +116,7 @@ do
         echo $node > /dev/null
       fi
 
-      if [ -f  $SOURCE_FILE_TAG* ] ; then
+      if [ -f  $SOURCE_FILE_TAG*$target_ ] ; then
         echo file exists! >/dev/null
       else
         echo file NO exists! >/dev/null
@@ -131,5 +134,4 @@ do
   echo $row >> $TAGA_DIR/countsSends.txt
 
 done
-
 

@@ -1,9 +1,10 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
-
-outputDir=output_`date +%j%H%M%S` 
-mkdir -p $outputDir
 
 for target in $targetList
 do

@@ -1,0 +1,224 @@
+10,19c10,19
+< MYLOGIN_ID=yourLoginIdGoesHere
+< MYPASSWD=YourPasswordGoesHere
+< COMMAND=YourPrimaryCommandNameGoesHere
+< DAEMON1_IP="192.168.43.69"
+< DAEMON2_IP="10.0.0.22"
+< OLDPROCFILE1="/tmp/socketfileXXX.sock"
+< OLDPROCFILE2="/home/$MYLOGIN_ID/commandXXX.pid"
+< OLDPROCFILE3="/home/$MYLOGIN_ID/python/python.pid"
+< OLDSOCKPROCFILE1="/tmp/sockeetfile.sock"
+< OLDSOCKPROCFILE2="/home/$MYLOGIN_ID/yourprimarycommand.pid"
+---
+> # dlm temp 
+> PROTO="RESTCONF_FORCE" # (Testing1)
+> PROTO="NETCONF_FORCE" # (Testing2)
+> PROTO="NETCONF" # (Normal2)
+> PROTO="RESTCONF" # (Normal1)
+> # dlm temp end
+> 
+> MYLOGIN_ID=darrin
+> MYPASSWD=roller123
+> COMMAND=yangcli-pro
+24,25c24,34
+< STRICT_TIME_SYNCH=0
+< STRICT_TIME_SYNCH=1
+---
+> # verify time synch?
+> TIME_SYNCH_CHECK_ENABLED=0 # (Testing)
+> TIME_SYNCH_CHECK_ENABLED=1 # (Normal)
+> 
+> # strict time synch?
+> STRICT_TIME_SYNCH=0 # (Testing)
+> STRICT_TIME_SYNCH=1 # (Normal)
+> 
+> # get ping times?
+> PING_TIME_CHECK_ENABLED=1 # (Testing)
+> PING_TIME_CHECK_ENABLED=0 # (Normal)
+33,37c42,51
+< MAX_ENVIRON_SIM_LOOPS=2 # simulated ENVIRON environ
+< MAX_ENVIRON_SIM_LOOPS=1 # simulated ENVIRON environ
+< MAX_ENVIRON_SIM_LOOPS=0 # simulated ENVIRON environ (Normal)
+< ENVIRON_SIMULATION=1 # simulated ENVIRON environ (Normal)/(Testing)
+< ENVIRON_SIMULATION=0 # simulated ENVIRON environ (Normal)
+---
+> ##############################################
+> # ENVIRON SIMULATION SWITCHES
+> ##############################################
+> # dlm temp 
+> MAX_ENVIRON_SIM_LOOPS=2 # simulated ENVIRON MANET environ
+> MAX_ENVIRON_SIM_LOOPS=1 # simulated ENVIRON MANET environ
+> MAX_ENVIRON_SIM_LOOPS=0 # simulated ENVIRON MANET environ (Normal)
+> ENVIRON_SIMULATION=1 # simulated ENVIRON MANET environ (Normal)/(Testing)
+> ENVIRON_SIMULATION=0 # simulated ENVIRON MANET environ (Normal)
+> # dlm temp end
+42,44c56,63
+< # Primary Sim Servers 
+< PRIMARY_SIM_SERVER_ON=0 # (Testing)
+< PRIMARY_SIM_SERVER_ON=1 # (Normal)
+---
+> # dlm temp 
+> #PRIMARY_SIM_SERVER=netconfd-pro
+> #PRIMARY_SIM_CLIENT=yangcli-pro
+> # dlm temp end
+> 
+> # Primary Sim Servers (netconfd-pro)
+> PRIMARY_SIM_SERVER_ON=1 # (Old Normal)
+> PRIMARY_SIM_SERVER_ON=0 # (Normal) # this is now a daemon
+46d64
+< START_SIMULATION=0 # Do Not Start Specialized Simulation Servers (Normal)
+47a66
+> START_SIMULATION=0 # Do Not Start Specialized Simulation Servers (Normal)
+59d77
+< MAX_OUTPUT_ENABLED=0 # (Normal)
+60a79
+> MAX_OUTPUT_ENABLED=0 # (Normal)
+62,64c81,97
+< # XXX Stimulation
+< XXX_ON=1 # (Testing)
+< XXX_ON=0 # (Normal)
+---
+> # RDR Stimulation
+> RDR_ON=1 # (Testing)
+> RDR_ON=0 # (Normal)
+> 
+> # LDR Stimulation
+> LDR_ON=1 # (Testing)
+> LDR_ON=0 # (Normal)
+> 
+> # HLS Stimulation
+> HLS_ON=1 # (Testing)
+> HLS_ON=0 # (Normal)
+> 
+> # dlm temp 
+> # JTX Stimulation
+> JTX_ON=1 # (Testing)
+> JTX_ON=0 # (Normal)
+> # dlm temp end
+65a99
+> # dlm temp 
+67,71c101,114
+< DEVICE1=1 
+< DEVICE2=1 
+< DEVICE3=1
+< DEVICE4=0 
+< DEVICE5=0
+---
+> SENSOR_ON=1 
+> RADIO_ON=1 
+> JAMMER_ON=1
+> MCA_ON=0 
+> NMS_ON=0
+> # dlm temp end
+> 
+> # dlm temp 
+> ##############################################
+> # YW Remote Server Testing
+> ##############################################
+> YW_ON=1 # (Testing)
+> YW_ON=0 # (Normal)
+> # dlm temp end
+80a124
+> # dlm temp 
+84,85c128,129
+< START_OF_CYCLE_TESTS_ENABLED=1
+< START_OF_CYCLE_TESTS_ENABLED=0
+---
+> START_OF_CYCLE_TESTS_ENABLED=1 # Testing
+> START_OF_CYCLE_TESTS_ENABLED=0 # Normal
+90,91c134,135
+< MID_CYCLE_TESTS_ENABLED=1
+< MID_CYCLE_TESTS_ENABLED=0
+---
+> MID_CYCLE_TESTS_ENABLED=1 # Testing
+> MID_CYCLE_TESTS_ENABLED=0 # Normal
+96,97c140,146
+< END_OF_CYCLE_TESTS_ENABLED=1
+< END_OF_CYCLE_TESTS_ENABLED=0
+---
+> # dlm temp end
+> 
+> END_OF_CYCLE_TESTS_ENABLED=1 # Testing
+> END_OF_CYCLE_TESTS_ENABLED=0 # Normal
+> 
+> END_OF_CYCLE_TESTS2_ENABLED=1 # Testing
+> END_OF_CYCLE_TESTS2_ENABLED=0 # Normal
+99,100c148,149
+< END_OF_CYCLE_TESTS2_ENABLED=1
+< END_OF_CYCLE_TESTS2_ENABLED=0
+---
+> END_OF_CYCLE_TESTS3_ENABLED=1 # Testing
+> END_OF_CYCLE_TESTS3_ENABLED=0 # Normal
+102,103c151,159
+< END_OF_CYCLE_TESTS3_ENABLED=1
+< END_OF_CYCLE_TESTS3_ENABLED=0
+---
+> 
+> # dlm temp 
+> ##############################################
+> # All or None OVERRIDE ALL OF TEST CONFIG Above IS HERE!!
+> ##############################################
+> #END_OF_CYCLE_TESTS_ENABLED=0
+> #MID_CYCLE_TESTS_ENABLED=$END_OF_CYCLE_TESTS_ENABLED
+> #START_OF_CYCLE_TESTS_ENABLED=$END_OF_CYCLE_TESTS_ENABLED
+> # dlm temp end
+108,109c164,165
+< EXTRA_FILE_CLEANUP_ENABLED=1 # 
+< EXTRA_FILE_CLEANUP_ENABLED=0 #
+---
+> EXTRA_FILE_CLEANUP_ENABLED=1 # Testing 
+> EXTRA_FILE_CLEANUP_ENABLED=0 # Normal
+126a183
+> DURATION1=10
+127a185,188
+> DURATION1=5
+> DURATION2=5
+> DURATION1=20
+> DURATION2=20
+130a192,194
+> SERVER_INIT_DELAY=10
+> SERVER_INIT_DELAY=5
+> SERVER_INIT_DELAY=10
+131a196,199
+> MSGCOUNT=3
+> MSGCOUNT=5
+> MSGCOUNT=10000
+> MSGCOUNT=1000
+132a201,206
+> MSGCOUNT=100
+> MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
+> MSGRATE=5   # 5 for five per second, 0.2 for each 5 seconds
+> MSGRATE=500 # 5 for five per second, 0.2 for each 5 seconds
+> MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
+> MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
+133a208
+> MSGRATE=10 # 5 for five per second, 0.2 for each 5 seconds
+135a211,214
+> # try to disable traffic (MSGCOUNT == 0 does not work!)
+> #MSGRATE=0.0 
+> #MSGCOUNT=0
+> 
+166a246
+> #echo $INTERFACE
+170a251,252
+> SCRIPTS_DIR=$HOME/scripts
+> TAGA_DIR=$SCRIPTS_DIR/taga
+174a257,258
+> # default to localhost
+> MYIP=localhost
+177c261,263
+< for ip in $MYIPCANDIDATES; do if echo $targetList | grep $ip >/dev/null ; then MYIP=$ip; break; fi; done
+---
+> for ip in $MYIPCANDIDATES; do if echo $targetList | grep $ip >/dev/null ; then MYIP=$ip; break; else MYIP=localhost; fi; done
+> #echo CANDIDATES: $MYIPCANDIDATES
+> #echo MYIP: $MYIP
+184a271
+> TEST_DESCRIPTION="taga_anycast"
+186,188d272
+< # verify time synch?
+< TIME_SYNCH_CHECK_ENABLED=0
+< TIME_SYNCH_CHECK_ENABLED=1
+194c278
+< MASTER=10.0.0.18
+---
+> MASTER=192.168.43.6

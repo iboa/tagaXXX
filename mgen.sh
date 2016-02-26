@@ -1,8 +1,14 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
 echo $0 executing at `date`
+
+MY_PARAM_IP=$1
 
 ###############################
 # Init Part
@@ -185,4 +191,18 @@ do
   mgen input $TAGA_DIR/script.mgn
 
 done
+
+# IPERF examples
+#--------------------------------------------------
+#echo Running iperf on `hostname` | tee $STATUS_FILE
+#sudo iperf -s -u -B 225.0.0.57 -i 10
+#echo "sudo iperf -s -u -B $MYMCAST_ADDR -i 10"
+#sudo iperf -s -u -B $MYMCAST_ADDR -i 10
+
+# IPERF examples
+#--------------------------------------------------
+#echo Running iperf on `hostname` | tee $STATUS_FILE
+#sudo iperf -s -u -B 225.0.0.57 -i 10
+#echo "sudo iperf -s -u -B $MYMCAST_ADDR -i 10"
+#sudo iperf -s -u -B $MYMCAST_ADDR -i 10
 
