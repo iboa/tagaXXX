@@ -47,10 +47,6 @@ ENVIRON_SIMULATION=0 # simulated ENVIRON MANET environ (Normal)
 ##############################################
 # Simulation Server Config Follows
 ##############################################
-# dlm temp 
-#PRIMARY_SIM_SERVER=netconfd-pro
-#PRIMARY_SIM_CLIENT=yangcli-pro
-# dlm temp end
 
 # Primary Sim Servers (netconfd-pro)
 PRIMARY_SIM_SERVER_ON=1 # (Old Normal)
@@ -76,54 +72,13 @@ MAX_OUTPUT_ENABLED=0 # (Normal)
 XXX_ON=1 # (Testing)
 XXX_ON=0 # (Normal)
 
-# RDR Stimulation
-RDR_ON=1 # (Testing)
-RDR_ON=0 # (Normal)
-
-# LDR Stimulation
-LDR_ON=1 # (Testing)
-LDR_ON=0 # (Normal)
-
-# HLS Stimulation
-HLS_ON=1 # (Testing)
-HLS_ON=0 # (Normal)
-
-# dlm temp 
-# JTX Stimulation
-JTX_ON=1 # (Testing)
-JTX_ON=0 # (Normal)
-# dlm temp end
-
-# XXXX simulators on/off flags
+# XXXX DEVICE simulators on/off flags
 DEVICE1=1 
 DEVICE2=1 
 DEVICE3=1
 DEVICE4=0 
 DEVICE5=0
 
-# dlm temp 
-# XXXX simulators on/off flags
-# XXXX simulators on/off flags
-#DEVICE1=1 
-#DEVICE2=1 
-#DEVICE3=1
-#DEVICE4=0 
-#DEVICE5=0
-SENSOR_ON=1 
-RADIO_ON=1 
-JAMMER_ON=1
-MCA_ON=0 
-NMS_ON=0
-# dlm temp end
-
-
-# dlm temp 
-##############################################
-# YW Remote Server Testing
-##############################################
-YW_ON=1 # (Testing)
-YW_ON=0 # (Normal)
-# dlm temp end
 
 ##############################################
 # End of Server Config 
@@ -133,42 +88,30 @@ YW_ON=0 # (Normal)
 # Begin of Client Config 
 ##############################################
 
-# dlm temp 
 ##############################################
-# Start of Cycle Testing (yangcli-pro client)
+# Start of Cycle Testing (test client testing)
 ##############################################
 START_OF_CYCLE_TESTS_ENABLED=1 # Testing
 START_OF_CYCLE_TESTS_ENABLED=0 # Normal
 
 ##############################################
-# Mid Cycle Testing (yangcli-pro client)
+# Mid Cycle Testing (test client testing)
 ##############################################
 MID_CYCLE_TESTS_ENABLED=1 # Testing
 MID_CYCLE_TESTS_ENABLED=0 # Normal
 
 ##############################################
-# End of Cycle Testing (yangcli-pro client)
+# End of Cycle Testing (test client testing)
 ##############################################
-# dlm temp end
 
-END_OF_CYCLE_TESTS_ENABLED=1 # Testing
-END_OF_CYCLE_TESTS_ENABLED=0 # Normal
+END_OF_CYCLE_TESTS1_ENABLED=1 # Testing
+END_OF_CYCLE_TESTS1_ENABLED=0 # Normal
 
 END_OF_CYCLE_TESTS2_ENABLED=1 # Testing
 END_OF_CYCLE_TESTS2_ENABLED=0 # Normal
 
 END_OF_CYCLE_TESTS3_ENABLED=1 # Testing
 END_OF_CYCLE_TESTS3_ENABLED=0 # Normal
-
-
-# dlm temp 
-##############################################
-# All or None OVERRIDE ALL OF TEST CONFIG Above IS HERE!!
-##############################################
-#END_OF_CYCLE_TESTS_ENABLED=0
-#MID_CYCLE_TESTS_ENABLED=$END_OF_CYCLE_TESTS_ENABLED
-#START_OF_CYCLE_TESTS_ENABLED=$END_OF_CYCLE_TESTS_ENABLED
-# dlm temp end
 
 ##############################################
 # additional admin/cleanup
@@ -230,10 +173,15 @@ MSGLEN=1200
 TESTTYPE="MCAST"
 TESTTYPE="UCAST"
 
-# Set this TESTONLY 1 if testing and you want the output directory to be stable
-# hint: e.g. for countSends.sh and countReceives.sh script testing
-TESTONLY=0
-TESTONLY=1
+####################################################
+# Archive or No Archive
+####################################################
+#
+# Set TESTONLY to 1 to force output directory to be stable (disable archiving)
+# hint: e.g. useful for countSends.sh and countReceives.sh script testing
+# 
+TESTONLY=0 # archiving enabled
+TESTONLY=1 # archiving disabled
 
 
 MYMCAST_ADDR="225.0.0.25"
