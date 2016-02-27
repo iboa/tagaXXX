@@ -36,19 +36,16 @@ ALL_TESTS_DISABLED=0 # enable all tests (Normal)
 ##############################################
 # ENVIRON SIMULATION SWITCHES
 ##############################################
-# dlm temp 
-MAX_ENVIRON_SIM_LOOPS=2 # simulated ENVIRON MANET environ
-MAX_ENVIRON_SIM_LOOPS=1 # simulated ENVIRON MANET environ
-MAX_ENVIRON_SIM_LOOPS=0 # simulated ENVIRON MANET environ (Normal)
-ENVIRON_SIMULATION=1 # simulated ENVIRON MANET environ (Normal)/(Testing)
-ENVIRON_SIMULATION=0 # simulated ENVIRON MANET environ (Normal)
-# dlm temp end
+MAX_ENVIRON_SIM_LOOPS=1 # simulated environ loop count (Testing)
+MAX_ENVIRON_SIM_LOOPS=0 # simulated environ loop count (Normal)
+ENVIRON_SIMULATION=1 # simulated environ on/off flag (Normal)/(Testing)
+ENVIRON_SIMULATION=0 # simulated environ on/off flag (Normal)
 
 ##############################################
 # Simulation Server Config Follows
 ##############################################
 
-# Primary Sim Servers (netconfd-pro)
+# Primary Sim Servers 
 PRIMARY_SIM_SERVER_ON=1 # (Old Normal)
 PRIMARY_SIM_SERVER_ON=0 # (Normal) # this is now a daemon
 
@@ -78,7 +75,6 @@ DEVICE2=1
 DEVICE3=1
 DEVICE4=0 
 DEVICE5=0
-
 
 ##############################################
 # End of Server Config 
