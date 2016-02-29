@@ -6,7 +6,8 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
-KILL_LIST="tcpdump mgen survey xxx" 
+# order matters! stop generators (mgen) before monitors (tcpdump)
+KILL_LIST="mgen survey xxx tcpdump" 
 
 for proc_name in $KILL_LIST
 do
