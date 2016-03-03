@@ -20,6 +20,8 @@ TAGA Features:
   4. Auto Distribution of (updates to) Configuration
   5. Auto File Collection and Process Cleanup
   6. Auto Generation of Analytical Artifacts
+  7. Auto resource utilization monitor and display
+  8. Distributed Processing provides for robust data generation and collection
 
   Extendability:
   -----------
@@ -53,7 +55,6 @@ TAGA Features:
       - fosters teamwork, collaboration, and communication
   2. Sample Filters and other extensions available upon request to info@iboa.us
 
-
 =============================
 TAGA System Requirements:
 =============================
@@ -63,7 +64,6 @@ TAGA System Requirements:
 3. libssh (ssh)
 4. libpcap (tcpdump)
 5. mgen, iperf, or similar traffic generation engines
-
 
 ---------
 NOTES:
