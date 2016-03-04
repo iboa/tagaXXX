@@ -6,7 +6,6 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
-
 #########################################
 # Update the MASTER entry in the config
 #########################################
@@ -21,7 +20,6 @@ echo MASTER=$MYIP >> $TAGA_DIR/config
 #########################################
 # DONE Update the MASTER entry in the config
 #########################################
-
 
 # set the flag in the flag file
 echo $ENVIRON_SIMULATION > /tmp/simulationFlag.txt
@@ -59,6 +57,13 @@ if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
 fi
 sleep 1
 
+# get resource usage if enabled
+if [ $RESOURCE_MON_ENABLED -eq 1 ]; then
+  ./wrapResourceUsage.sh
+fi
+sleep 1
+
+
 # stop the Simulation Always 
 if [ true ] ; then
 #if [ $STOP_SIMULATION -eq 1 ] ; then
@@ -87,6 +92,12 @@ do
    # get ping times if enabled
    if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
      ./pingTimes.sh
+   fi
+   sleep 1
+
+   # get resource usage if enabled
+   if [ $RESOURCE_MON_ENABLED -eq 1 ]; then
+     ./wrap.sh
    fi
    sleep 1
 
