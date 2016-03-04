@@ -220,14 +220,19 @@ do
    ./collect.sh $outputDir
    ./cleanAll.sh $outputDir
 
+   # remove old and put current data in generic output directory
+   rm -rf $OUTPUT_DIR/output
+   cp -r $outputDir $OUTPUT_DIR/output
+
    # count and sort and display results matrix
    ./countSends.sh $outputDir $iter $startTime $startDTG
    ./countReceives.sh $outputDir $iter $startTime $startDTG 
    sleep 5
 
    # remove old and put current data in generic output directory
-   rm -rf $OUTPUT_DIR/output
-   cp -r $outputDir $OUTPUT_DIR/output
+   #rm -rf $OUTPUT_DIR/output
+   #cp -r $outputDir $OUTPUT_DIR/output
+
    # move output to the archive
    mv $TAGA_DIR/output/output_* $SCRIPTS_DIR/archive 2>/dev/null
 
