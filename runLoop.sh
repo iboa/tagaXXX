@@ -6,19 +6,24 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
+
 #########################################
 # Update the MASTER entry in the config
-# strip old MASTER entries and blank lines at end of file
 #########################################
+# strip old MASTER entries and blank lines at end of file
 cat $TAGA_DIR/config | sed -e s/^MASTER=.*$//g |     \
       sed -e :a -e '/./,$!d;/^\n*$/{$d;N;;};/\n$/ba' \
            > $TAGA_DIR/tmp.config
-
 # move temp to config
 mv $TAGA_DIR/tmp.config $TAGA_DIR/config
-
 # Update the MASTER entry in the config
 echo MASTER=$MYIP >> $TAGA_DIR/config
+#########################################
+# DONE Update the MASTER entry in the config
+#########################################
+
+
+# set the flag in the flag file
 echo $ENVIRON_SIMULATION > /tmp/simulationFlag.txt
 
 # source again due to above as well as other boot strap-like dependencies
