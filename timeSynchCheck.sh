@@ -167,6 +167,9 @@ do
           let delay=1
        else
           duration="(X > 10 secs) ******* *******" 
+          SECS=`echo $DELTA | cut -c1-2`
+          FRACTIONPART=`echo $DELTA | cut -c3`
+          duration="(X > $SECS.$FRACTIONPART secs) ******* *******" 
           let delay=5
        fi
        echo -----------
