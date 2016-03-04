@@ -10,9 +10,9 @@ hostList=`$TAGA_DIR/hostList.sh`
 ####################################################
 # Test type - Multicast or Unicast, UDP or TCP
 ####################################################
-TESTTYPE="UCAST"     # UDP UCAST
 TESTTYPE="UCAST_TCP" # TCP UCAST
 TESTTYPE="MCAST"     # UDP MCAST
+TESTTYPE="UCAST"     # UDP UCAST
 
 ####################################################
 # Portability Section, this section requires update 
@@ -33,6 +33,10 @@ TIME_SYNCH_CHECK_ENABLED=1 # (Normal)
 # strict time synch?
 STRICT_TIME_SYNCH=0 # (Testing)
 STRICT_TIME_SYNCH=1 # (Normal)
+
+# resource monitor (top, netstat, etc) enabled?
+RESOURCE_MON_ENABLED=0 # (Testing)
+RESOURCE_MON_ENABLED=1 # (Testing)
 
 # get ping times?
 PING_TIME_CHECK_ENABLED=1 # (Testing)
@@ -238,4 +242,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=192.168.43.124
+MASTER=10.0.0.27
