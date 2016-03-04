@@ -135,8 +135,8 @@ DURATION1=10
 DURATION2=10
 DURATION1=5
 DURATION2=5
-DURATION1=20
-DURATION2=20
+DURATION1=10
+DURATION2=10
 
 SERVER_INIT_DELAY=10
 SERVER_INIT_DELAY=20
@@ -150,6 +150,7 @@ MSGCOUNT=10000
 MSGCOUNT=1000
 MSGCOUNT=1000
 MSGCOUNT=100
+MSGCOUNT=10
 MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=5   # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=500 # 5 for five per second, 0.2 for each 5 seconds
@@ -158,16 +159,18 @@ MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=10 # 5 for five per second, 0.2 for each 5 seconds
 MSGLEN=1200
+MSGLEN=200
 
 # try to disable traffic (MSGCOUNT == 0 does not work!)
 #MSGRATE=0.0 
 #MSGCOUNT=0
 
 ####################################################
-# Test type - Multicast or Unicast
+# Test type - Multicast or Unicast, UDP or TCP
 ####################################################
-TESTTYPE="MCAST"
-TESTTYPE="UCAST"
+TESTTYPE="UCAST_TCP" # TCP UCAST
+TESTTYPE="MCAST"     # UDP MCAST
+TESTTYPE="UCAST"     # UDP UCAST
 
 ####################################################
 # Archive or No Archive
@@ -231,4 +234,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=localhost
+MASTER=192.168.43.124
