@@ -7,6 +7,17 @@ touch $TAGA_DIR/hostList.sh
 touch $TAGA_DIR/hostList.txt
 hostList=`$TAGA_DIR/hostList.sh`
 
+####################################################
+# Test type - Multicast or Unicast, UDP or TCP
+####################################################
+TESTTYPE="UCAST"     # UDP UCAST
+TESTTYPE="UCAST_TCP" # TCP UCAST
+TESTTYPE="MCAST"     # UDP MCAST
+
+####################################################
+# Portability Section, this section requires update 
+# after port to new system
+####################################################
 MYLOGIN_ID=yourLoginIdGoesHere
 MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
@@ -164,13 +175,6 @@ MSGLEN=200
 # try to disable traffic (MSGCOUNT == 0 does not work!)
 #MSGRATE=0.0 
 #MSGCOUNT=0
-
-####################################################
-# Test type - Multicast or Unicast, UDP or TCP
-####################################################
-TESTTYPE="UCAST_TCP" # TCP UCAST
-TESTTYPE="MCAST"     # UDP MCAST
-TESTTYPE="UCAST"     # UDP UCAST
 
 ####################################################
 # Archive or No Archive
