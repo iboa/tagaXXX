@@ -144,6 +144,22 @@ else
    echo "# Place your aliases below; See the 'testiboa' alias for example" >> $IBOA_USER_FILE
    echo "################################################################" >> $IBOA_USER_FILE
    echo "alias testiboa='echo This is a Test'"                             >> $IBOA_USER_FILE
+   echo "################################################################" >> $IBOA_USER_FILE
+   echo "# BEGIN TAGA Exensions are included here                              " >> $IBOA_USER_FILE
+   echo "################################################################" >> $IBOA_USER_FILE
+   echo "alias run='echo This is a Test'"                                  >> $IBOA_USER_FILE
+   echo "alias run='TAGA_DIR=~/scripts/taga; \$TAGA_DIR/runLoopWrapper.sh'" >> $IBOA_USER_FILE
+   echo "alias mon='TAGA_DIR=~/scripts/taga; touch \$TAGA_DIR/counts.txt; tail -f \$TAGA_DIR/counts.txt'" >> $IBOA_USER_FILE
+   echo "alias grem='TAGA_DIR=~/scripts/taga; \$TAGA_DIR/remoteLoginAll.sh'" >> $IBOA_USER_FILE
+   echo "alias vc='TAGA_DIR=~/scripts/taga; vi \$TAGA_DIR/config'"         >> $IBOA_USER_FILE
+   echo "alias vt='TAGA_DIR=~/scripts/taga; vi \$TAGA_DIR/targetList.sh'"  >> $IBOA_USER_FILE
+   echo "################################################################" >> $IBOA_USER_FILE
+   echo "# END TAGA Exensions are included here                              " >> $IBOA_USER_FILE
+   echo "################################################################" >> $IBOA_USER_FILE
+   echo "################################################################" >> $IBOA_USER_FILE
+   echo "# Place your aliases below; See the 'testiboa' alias for example" >> $IBOA_USER_FILE
+   echo "################################################################" >> $IBOA_USER_FILE
+   echo "alias testiboa='echo This is a Test'"                             >> $IBOA_USER_FILE
    # build .bashrc.iboa.group.$group
    echo "################################################################" >> $IBOA_GROUP_FILE
    echo "# Place your aliases below; See the 'testiboa' alias for example" >> $IBOA_GROUP_FILE
