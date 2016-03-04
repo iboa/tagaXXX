@@ -21,7 +21,6 @@ do
 done
 
 echo
-echo Total Collected File Count:  `ls $outputDir | wc -l`
-echo Total Collected Line Count:  `cat $outputDir/* | wc -l`
+echo $0 : Total File Count: `ls $outputDir | wc -l` Total Line Count: `cat $outputDir/* | wc -l`
 echo
 
