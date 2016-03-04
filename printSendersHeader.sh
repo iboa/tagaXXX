@@ -19,8 +19,8 @@ startDTG=$4
 echo;echo
 echo >> $TAGA_DIR/counts.txt
 
-echo `date` Iteration: $iter StartDTG: $startTime $startDTG
-echo `date` Iteration: $iter StartDTG: $startTime $startDTG >> $TAGA_DIR/counts.txt
+echo `date` Iteration: $iter StartDTG: $startTime $startDTG $TESTTYPE
+echo `date` Iteration: $iter StartDTG: $startTime $startDTG $TESTTYPE >> $TAGA_DIR/counts.txt
 
 row="$1 TABLE   -------------------------------  RECEIVERS LIST -------------------------------------"
 if [ $NARROW_DISPLAY -eq 1 ]; then
