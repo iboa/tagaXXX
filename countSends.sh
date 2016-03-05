@@ -39,10 +39,10 @@ let expectedCount=$expectedCount*$expectedCount2
 #echo $expectedCount
 
 let numerator=`cat $outputDir/* | wc -l`
-let numerator=$numerator*100
+let numerator=$numerator*10000
 let denominator=$expectedCount
 let percent=$numerator/$denominator 
-#echo Percent: $percent
+percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
 
 echo
 #echo $0 : Total File Count: `ls $outputDir | wc -l` Total Line Count: `cat $outputDir/* | wc -l` $expectedCount expected \($expectedCount expected\)
