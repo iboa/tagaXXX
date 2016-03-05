@@ -12,9 +12,8 @@ KILL_LIST="mgen survey xxx tcpdump"
 for proc_name in $KILL_LIST
 do
    # Kill the process id(s) of the proc name
-   echo kiling $proc_name ....
    KILL_LIST2=`ps -ef | grep \$proc_name | grep -v grep | cut -c10-15` 
-   echo Kill_list: $KILL_LIST2
+   echo killing $proc_name ....  Kill_list: $KILL_LIST2
    sudo kill -9 $KILL_LIST2 <$TAGA_DIR/passwd.txt < $TAGA_DIR/passwd.txt
 done
 
