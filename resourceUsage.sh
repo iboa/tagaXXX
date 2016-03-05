@@ -22,7 +22,3 @@ echo ------------  netstat -r  \(route\) `hostname` $MYIP ---------------------
 sleep 1
 netstat -r
 
-echo ------------  ifconfig `hostname` ifconfig $MYIP --------------------------
-sleep 1
-ifconfig
-
