@@ -86,11 +86,14 @@ fi
 ./synch.sh
 
 let iter=0
+let k=0
 startTime="`date +%T`"
 startDTG="`date`"
 
 while true
 do
+
+   let k=$k+1
 
    # check time synch if enabled
    if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
@@ -106,7 +109,11 @@ do
 
    # get resource usage if enabled
    if [ $RESOURCE_MON_ENABLED -eq 1 ]; then
-     ./wrap.sh
+      let mod=$k%$RESOURCE_DISPLAY_MODULUS
+      if [ $mod -eq 0 ] ; then
+        echo k:$k
+        ./wrapResourceUsage.sh
+      fi
    fi
    sleep 1
 

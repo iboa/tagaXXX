@@ -23,6 +23,7 @@ MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
 
+
 ####################################################
 # Time Synch Strict Flag
 ####################################################
@@ -37,6 +38,8 @@ STRICT_TIME_SYNCH=1 # (Normal)
 # resource monitor (top, netstat, etc) enabled?
 RESOURCE_MON_ENABLED=0 # (Testing)
 RESOURCE_MON_ENABLED=1 # (Testing)
+let RESOURCE_DISPLAY_MODULUS=5
+let RESOURCE_DISPLAY_MODULUS=10
 
 # get ping times?
 PING_TIME_CHECK_ENABLED=1 # (Testing)
@@ -242,4 +245,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=10.0.0.27
+MASTER=192.168.43.124
