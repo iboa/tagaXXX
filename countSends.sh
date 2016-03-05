@@ -86,17 +86,17 @@ do
         cat /tmp/curcount2.txt  | grep "length $MSGLEN" > /tmp/curcount.txt  # verify length
         cat /tmp/curcount.txt  > /tmp/curcount2.txt   # copy the output to temp file curcount2.txt
         cat /tmp/curcount2.txt | wc -l                > /tmp/curcount.txt   # get the count
-      elif [ $TESTTYPE == "UCAST" ]; then
-        # UCAST
+      elif [ $TESTTYPE == "UCAST_TCP" ]; then
+        # UCAST_TCP
+        # Note, this UCAST_TCP case is currently the same as the UCAST_UDP case below
+        # Note, if this UCAST_TCP case requires special update in the future, similar
+        # changes may require a similar block update in the countReceives.sh file
         cat /tmp/curcount.txt  | cut -d">" -f 2-      > /tmp/curcount2.txt  # get receivers only
         cat /tmp/curcount2.txt | grep $target2\\\.      > /tmp/curcount.txt   # remove all except target2 rows
         cat /tmp/curcount.txt  | grep "length $MSGLEN" > /tmp/curcount2.txt  # verify length
         cat /tmp/curcount2.txt | wc -l                > /tmp/curcount.txt   # get the count
       else
-        # UCAST_TCP
-        # Note, this UCAST_TCP case is currently the same as the UCAST case above
-        # Note, if this UCAST_TCP case requires special update in the future, similar
-        # changes may require a similar block update in the countReceives.sh file
+        # UCAST_UDP
         cat /tmp/curcount.txt  | cut -d">" -f 2-      > /tmp/curcount2.txt  # get receivers only
         cat /tmp/curcount2.txt | grep $target2\\\.      > /tmp/curcount.txt   # remove all except target2 rows
         cat /tmp/curcount.txt  | grep "length $MSGLEN" > /tmp/curcount2.txt  # verify length

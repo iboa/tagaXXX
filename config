@@ -12,7 +12,10 @@ hostList=`$TAGA_DIR/hostList.sh`
 ####################################################
 TESTTYPE="UCAST_TCP" # TCP UCAST
 TESTTYPE="MCAST"     # UDP MCAST
-TESTTYPE="UCAST"     # UDP UCAST
+TESTTYPE="UCAST_UDP" # UDP UCAST
+
+DAEMON1_IP=192.168.43.69 # work network sim daemon client
+DAEMON2_IP=10.0.0.21     # home network sim daemon client
 
 ####################################################
 # Portability Section, this section requires update 
@@ -22,7 +25,6 @@ MYLOGIN_ID=yourLoginIdGoesHere
 MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
-
 
 ####################################################
 # Time Synch Strict Flag
@@ -36,10 +38,12 @@ STRICT_TIME_SYNCH=0 # (Testing)
 STRICT_TIME_SYNCH=1 # (Normal)
 
 # resource monitor (top, netstat, etc) enabled?
-RESOURCE_MON_ENABLED=0 # (Testing)
 RESOURCE_MON_ENABLED=1 # (Testing)
+RESOURCE_MON_ENABLED=0 # (Testing)
 let RESOURCE_DISPLAY_MODULUS=5
 let RESOURCE_DISPLAY_MODULUS=10
+let RESOURCE_DISPLAY_MODULUS=1
+let RESOURCE_DISPLAY_MODULUS=1000000
 
 # get ping times?
 PING_TIME_CHECK_ENABLED=1 # (Testing)

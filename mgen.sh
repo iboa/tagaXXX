@@ -48,11 +48,7 @@ if $TAGA_DIR/hostList.sh | grep `hostname` >/dev/null ; then
     # start the UDP listener in background
     #echo mgen port $MYMCAST_PORT 
     #mgen port $MYMCAST_PORT &
-  elif [ $TESTTYPE == "UCAST" ]; then
-    # UCAST UDP
-    # start the UDP listener in background
-    mgen port $MYPORT & 
-  else
+  elif [ $TESTTYPE == "UCAST_TCP" ]; then
     # UCAST TCP
     # override mgen_proto default value of UDP  
     mgen_proto=TCP
@@ -62,6 +58,10 @@ if $TAGA_DIR/hostList.sh | grep `hostname` >/dev/null ; then
             > $TAGA_DIR/script_tcp_listener.mgn  
     # start the TCP listener in background
     mgen input $TAGA_DIR/script_tcp_listener.mgn & 
+  else
+    # UCAST UDP
+    # start the UDP listener in background
+    mgen port $MYPORT & 
   fi
 else
   echo `hostname` is not in the list of Traffic/PLI Receivers | tee $STATUS_FILE
