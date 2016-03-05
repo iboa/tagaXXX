@@ -20,6 +20,45 @@ fi
 # go to the output Directory for processing
 cd $outputDir
 
+# calculate the expected line count
+let expectedCount=$MSGCOUNT
+let expectedCount2=0
+for target in $targetList
+do
+   for target2 in $targetList
+   do
+     if [ $target2 != $MYIP ]; then
+        let expectedCount2=$expectedCount2+1
+     fi
+   done
+done
+
+let expectedCount=$expectedCount*2
+let expectedCount=$expectedCount*$expectedCount2
+
+#echo $expectedCount
+
+let numerator=`cat $outputDir/* | wc -l`
+let numerator=$numerator*100
+let denominator=$expectedCount
+let percent=$numerator/$denominator 
+#echo Percent: $percent
+
+echo
+#echo $0 : Total File Count: `ls $outputDir | wc -l` Total Line Count: `cat $outputDir/* | wc -l` $expectedCount expected \($expectedCount expected\)
+
+echo $0 : Total File Count: `ls $outputDir | wc -l` Total Line Count: `cat $outputDir/* | wc -l` / $expectedCount msgs \($percent%\)
+
+echo >> $TAGA_DIR/counts.txt
+echo Iteration:$iter : Total File Count: `ls $outputDir | wc -l` Total Line Count: `cat $outputDir/* | wc -l` / $expectedCount msgs \($percent%\) >> $TAGA_DIR/counts.txt
+
+
+#let numerator=`cat $outputDir/* | wc -l`
+#let numerator=$numerator*100
+#let denominator=$expectedCount
+#let percent=$numerator/$denominator 
+#echo Percent: $percent
+
 ##################################################################
 # PRINT HEADER ROWS
 ##################################################################

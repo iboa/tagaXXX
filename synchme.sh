@@ -7,6 +7,7 @@ TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
 MYDIR=`pwd`
+MYDIR=$TAGA_DIR
 
 for target in $targetList
 do

@@ -9,7 +9,8 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
-echo $0 executing at `date`
+#echo $0 executing at `date`
+echo $0 $MYIP executing at `date`
 
 ################################################3
 # MAIN 
