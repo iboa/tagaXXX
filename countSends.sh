@@ -51,12 +51,11 @@ echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Lines:`cat $out
 
 
 
-
-
-
 #####################################################
 #####################################################
 #####################################################
+
+# NOTE: This section only works if we assume all messages successfully sent and counted on the sent line
 # calculate the expected line count
 let expectedCount=$MSGCOUNT
 let expectedCount2=0
@@ -83,7 +82,7 @@ let percent=$numerator/$denominator
 percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
 #echo
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Lines:$printCount / $expectedCount exp msgs \($percent%\)
-echo >> $TAGA_DIR/counts.txt
+#echo >> $TAGA_DIR/counts.txt
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Lines:$printCount / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
 
 
