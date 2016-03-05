@@ -43,7 +43,15 @@ let numerator=`cat $outputDir/* | wc -l`
 let numerator=$numerator*10000
 let denominator=$expectedCount
 let percent=$numerator/$denominator 
-percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+
+if [ $numerator -eq $denominator ]; then
+  percent="100.00"
+else
+  percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+fi
+
+
+
 echo
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Lines:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
 echo >> $TAGA_DIR/counts.txt
@@ -79,7 +87,15 @@ let printCount=$numerator
 let numerator=$numerator*10000
 let denominator=$expectedCount
 let percent=$numerator/$denominator 
-percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+
+if [ $numerator -eq $denominator ]; then
+  percent="100.00"
+else
+  percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+fi
+
+#percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+
 #echo
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Lines:$printCount / $expectedCount exp msgs \($percent%\)
 #echo >> $TAGA_DIR/counts.txt
