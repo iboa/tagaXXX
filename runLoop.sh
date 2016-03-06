@@ -243,7 +243,8 @@ do
      ./testXXX.sh
    fi
  
-   sleep 5
+   #sleep 5
+   sleep 1
 
    # stop the Simulation each iteration 
    if [ $STOP_SIMULATION -eq 1 ] ; then
