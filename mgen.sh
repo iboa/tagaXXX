@@ -152,6 +152,10 @@ do
   sed -e s/proto/$mgen_proto/g $TAGA_DIR/script.mgn.temp       > $TAGA_DIR/script.mgn.temp2 # toggle temp/temp2
   sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp2            > $TAGA_DIR/script.mgn       # finalize
 
+  if [ $TESTTYPE == "UCAST_TCP" ]; then
+     echo 10.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
+  fi
+
   # some cleanup
   rm $TAGA_DIR/script.mgn.temp $TAGA_DIR/script.mgn.temp2
 
@@ -196,6 +200,10 @@ do
   sed -e s/rate/$MSGRATE/g $TAGA_DIR/script.mgn.temp2          > $TAGA_DIR/script.mgn.temp  # toggle temp/temp2
   sed -e s/proto/$mgen_proto/g $TAGA_DIR/script.mgn.temp       > $TAGA_DIR/script.mgn.temp2 # toggle temp/temp2
   sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp2            > $TAGA_DIR/script.mgn       # finalize
+
+  if [ $TESTTYPE == "UCAST_TCP" ]; then
+     echo 10.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
+  fi
 
   # some cleanup
   rm $TAGA_DIR/script.mgn.temp $TAGA_DIR/script.mgn.temp2
