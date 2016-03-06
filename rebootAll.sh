@@ -15,8 +15,6 @@ echo
 
 read input
 
-#echo $input
-
 if [ $input == 'y' ]; then
   echo
   echo Rebooting All....
@@ -38,13 +36,11 @@ do
    fi
 
    echo rebooting $target .....
-   #ssh -l darrin $target sudo reboot 
-   ssh -l darrin $target sudo reboot <$SCRIPTS_DIR/taga/passwd.txt
+   ssh -l $MYLOGIN_ID $target sudo reboot <$SCRIPTS_DIR/taga/passwd.txt
 
 done
 echo
 
 echo rebooting self now...
-#ssh -l darrin $MYIP sudo reboot
-ssh -l darrin $MYIP sudo reboot <$SCRIPTS_DIR/taga/passwd.txt
+ssh -l $MYLOGIN_ID $MYIP sudo reboot <$SCRIPTS_DIR/taga/passwd.txt
 

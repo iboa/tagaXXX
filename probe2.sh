@@ -10,7 +10,6 @@ do
    echo
    echo processing $NETADDR
    
-   #ssh -l darrin $NETADDR hostname
    ping -W 1 -c 1 $NETADDR
   
    if [ $? -eq 0 ]; then
