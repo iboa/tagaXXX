@@ -20,41 +20,6 @@ fi
 # go to the output Directory for processing
 cd $outputDir
 
-#####################################################
-#####################################################
-#####################################################
-# calculate the expected line count
-let expectedCount=$MSGCOUNT
-let expectedCount2=0
-for target in $targetList
-do
-   for target2 in $targetList
-   do
-     if [ $target2 != $MYIP ]; then
-        let expectedCount2=$expectedCount2+1
-     fi
-   done
-done
-
-
-let expectedCount=$expectedCount*2
-let expectedCount=$expectedCount*$expectedCount2
-let numerator=`cat $outputDir/* | wc -l`
-let numerator=$numerator*10000
-let denominator=$expectedCount
-let percent=$numerator/$denominator 
-
-let checkValue=$numerator/10000 
-if [ $checkValue -eq $denominator ]; then
-  percent="100.00"
-else
-  percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
-fi
-
-echo
-echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
-echo >> $TAGA_DIR/counts.txt
-echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
 
 
 
@@ -94,9 +59,57 @@ else
   percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
 fi
 
+
+# write to output
+echo
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\)
-#echo >> $TAGA_DIR/counts.txt
+
+# write to counts.txt file
+echo >> $TAGA_DIR/counts.txt
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+
+
+
+#####################################################
+#####################################################
+#####################################################
+# calculate the expected line count
+let expectedCount=$MSGCOUNT
+let expectedCount2=0
+for target in $targetList
+do
+   for target2 in $targetList
+   do
+     if [ $target2 != $MYIP ]; then
+        let expectedCount2=$expectedCount2+1
+     fi
+   done
+done
+
+
+let expectedCount=$expectedCount*2
+let expectedCount=$expectedCount*$expectedCount2
+let numerator=`cat $outputDir/* | wc -l`
+let numerator=$numerator*10000
+let denominator=$expectedCount
+let percent=$numerator/$denominator 
+
+let checkValue=$numerator/10000 
+if [ $checkValue -eq $denominator ]; then
+  percent="100.00"
+else
+  percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+fi
+
+# write to output
+echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
+
+# write to counts.txt file
+echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+#echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs >> $TAGA_DIR/counts.txt
+
+
+
 
 
 #####################################################
