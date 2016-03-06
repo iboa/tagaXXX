@@ -86,7 +86,11 @@ if [ $checkValue -eq $denominator ]; then
   percent="100.00"
 else
   percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+  if [ $percent == "0." ]; then
+     percent="0.0"
+  fi
 fi
+
 
 # write to output
 echo
@@ -152,6 +156,9 @@ if [ $checkValue -eq $denominator ]; then
   percent="100.00"
 else
   percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
+  if [ $percent == "0." ]; then
+     percent="0.0"
+  fi
 fi
 
 # write to output
