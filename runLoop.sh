@@ -60,6 +60,9 @@ if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
 fi
 sleep 1
 
+# probe if enabled
+./probe.sh
+
 # get ping times if enabled
 if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
   ./pingTimes.sh
@@ -100,6 +103,9 @@ do
      ./timeSynchCheck.sh
    fi
    sleep 1
+
+   # probe if enabled
+   ./probe.sh
 
    # get ping times if enabled
    if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then

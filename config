@@ -11,8 +11,8 @@ hostList=`$TAGA_DIR/hostList.sh`
 # Test type - Multicast or Unicast, UDP or TCP
 ####################################################
 TESTTYPE="MCAST"     # UDP MCAST
-TESTTYPE="UCAST_UDP" # UDP UCAST
 TESTTYPE="UCAST_TCP" # TCP UCAST
+TESTTYPE="UCAST_UDP" # UDP UCAST
 
 ####################################################
 # Portability Section, this section requires update 
@@ -22,7 +22,6 @@ MYLOGIN_ID=yourLoginIdGoesHere
 MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
-
 
 DAEMON1_IP=192.168.43.69
 DAEMON2_IP=192.168.43.124
@@ -39,12 +38,12 @@ STRICT_TIME_SYNCH=0 # (Testing)
 STRICT_TIME_SYNCH=1 # (Normal)
 
 # resource monitor (top, netstat, etc) enabled?
-RESOURCE_MON_ENABLED=1 # (Testing)
 RESOURCE_MON_ENABLED=0 # (Testing)
+RESOURCE_MON_ENABLED=1 # (Testing)
 let RESOURCE_DISPLAY_MODULUS=5
 let RESOURCE_DISPLAY_MODULUS=10
-let RESOURCE_DISPLAY_MODULUS=1
 let RESOURCE_DISPLAY_MODULUS=1000000
+let RESOURCE_DISPLAY_MODULUS=1
 
 # get ping times?
 PING_TIME_CHECK_ENABLED=1 # (Testing)
@@ -169,6 +168,8 @@ MSGCOUNT=10
 MSGCOUNT=500
 MSGCOUNT=20
 MSGCOUNT=100
+MSGCOUNT=4
+MSGCOUNT=1
 MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=5   # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=500 # 5 for five per second, 0.2 for each 5 seconds
@@ -176,9 +177,9 @@ MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=10 # 5 for five per second, 0.2 for each 5 seconds
-MSGRATE=1 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=20 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=1 # 5 for five per second, 0.2 for each 5 seconds
 MSGLEN=1200
 MSGLEN=200
 MSGLEN=66
@@ -187,7 +188,6 @@ MSGLEN=826
 
 # DURATION depends on rate and count above
 let DURATION1=$MSGCOUNT/$MSGRATE
-let DURATION1=$DURATION1+10
 #echo $DURATION1
 DURATION2=20
 DURATION2=10
@@ -258,4 +258,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=192.168.43.124
+MASTER=10.0.0.27
