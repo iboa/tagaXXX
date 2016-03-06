@@ -84,6 +84,8 @@ let percent=$numerator/$denominator
 let checkValue=$numerator/10000 
 if [ $checkValue -eq $denominator ]; then
   percent="100.00"
+elif [ $checkValue -gt $denominator ]; then
+  percent=`echo $percent | cut -c1-3`.`echo $percent | cut -c4-5`
 else
   percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
   if [ $percent == "0." ]; then
@@ -154,6 +156,8 @@ let percent=$numerator/$denominator
 let checkValue=$numerator/10000 
 if [ $checkValue -eq $denominator ]; then
   percent="100.00"
+elif [ $checkValue -gt $denominator ]; then
+  percent=`echo $percent | cut -c1-3`.`echo $percent | cut -c4-5`
 else
   percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
   if [ $percent == "0." ]; then
