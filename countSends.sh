@@ -23,25 +23,25 @@ cd $outputDir
 # get Gross Received Count
 let grossReceivedCount=0
 
-# TODO: UCAST grossReceiveCount Support needs added to eliminate
-# TODO: need for cludge several lines below
-
 # Get Multicast Received Counts
 if [ $TESTTYPE == "MCAST" ]; then
   for target in $targetList
   do
     HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target\\\. | cut -d"." -f 5`
     SOURCE_FILE_TAG=$TEST_DESCRIPTION\_$HOST\_*$target\_
-    #echo $SOURCE_FILE_TAG* 
-    #sleep 3
-     # more $SOURCE_FILE_TAG* 
-    #cat $SOURCE_FILE_TAG* | wc -l 
-    #cat $SOURCE_FILE_TAG* | grep -v $target | wc -l 
+    # get our target receive count
     let targetReceivedCount=`cat $SOURCE_FILE_TAG* | grep -v $target | wc -l`
     let grossReceivedCount=$grossReceivedCount+$targetReceivedCount
-    #echo gross:$grossReceivedCount
-    #sleep 2
-    #cat $SOURCE_FILE_TAG* | grep $target\\\. > /tmp/curcount.txt 2>/dev/null
+  done
+else
+  # Get Unicast Received Counts
+  for target in $targetList
+  do
+    HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target\\\. | cut -d"." -f 5`
+    SOURCE_FILE_TAG=$TEST_DESCRIPTION\_$HOST\_*$target\_
+    # get receivers only and only our target
+    let targetReceivedCount=`cat $SOURCE_FILE_TAG* | cut -d">" -f 2- | grep $target | wc -l`
+    let grossReceivedCount=$grossReceivedCount+$targetReceivedCount
   done
 fi
 
@@ -50,11 +50,11 @@ fi
 #####################################################
 #####################################################
 
-# NOTE: This section only works if we assume all messages successfully sent and counted on the sent line
 # calculate the expected line count
 let expectedCount=$MSGCOUNT
 let expectedCount2=0
-let expectedCount3=0
+
+#let expectedCount3=0
 
 for target in $targetList
 do
@@ -73,52 +73,19 @@ do
       done
 #   fi
 
-#   for target2 in $targetList
-#   do
-#     if [ $target2 != $MYIP ]; then
-#       let expectedCount3=$expectedCount3+1
-#     fi
-#   done
-
 done
 
-
-
-#for target in $targetList
-#do
-#   # count the nodes we send our message to
-#   # if MCAST, we send only one message per all nodes
-#   if [ $TESTTYPE == "MCAST" ]; then
-#      let expectedCount2=$expectedCount2+1
-#      #break
-#   fi
-#
-#   # if UCAST, we send a message to each node, except ourself
-#   for target2 in $targetList
-#   do
-#     if [ $target2 != $MYIP ]; then
-#        let expectedCount2=$expectedCount2+1
-#     fi
-#   done
-#done
-
-# dlm temp
-
-#let expectedCount=$expectedCount*2
 let expectedCount=$expectedCount*$expectedCount2
-let numerator=`cat $outputDir/* | wc -l`
-let numerator=$numerator-$expectedCount
 
-# dlm temp find me
-if [ $TESTTYPE == "MCAST" ]; then
-  let numerator=$grossReceivedCount
-fi
-
-let printCount=$numerator
+#let numerator=`cat $outputDir/* | wc -l`
+#let numerator=$numerator-$expectedCount
 
 #if [ $TESTTYPE == "MCAST" ]; then
-#  let printCount=$grossReceivedCount
+#  let numerator=$grossReceivedCount
 #fi
+
+let numerator=$grossReceivedCount
+let printCount=$numerator
 
 let numerator=$numerator*10000
 let denominator=$expectedCount
@@ -166,15 +133,7 @@ do
       done
 #   fi
 
-#   for target2 in $targetList
-#   do
-#     if [ $target2 != $MYIP ]; then
-#       let expectedCount3=$expectedCount3+1
-#     fi
-#   done
-
 done
-
 
 
 let expectedCount=$expectedCount*2
@@ -196,47 +155,6 @@ echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $out
 
 # write to counts.txt file
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
-#echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs >> $TAGA_DIR/counts.txt
-
-
-
-
-
-#####################################################
-#####################################################
-#####################################################
-# calculate the expected line count
-#let expectedCount=$MSGCOUNT
-#let expectedCount2=0
-#for target in $targetList
-#do
-#   for target2 in $targetList
-#   do
-#     if [ $target2 != $MYIP ]; then
-#        let expectedCount2=$expectedCount2+1
-#     fi
-#   done
-#done
-#
-#
-#let expectedCount=$expectedCount*2
-#let expectedCount=$expectedCount*$expectedCount2
-#let numerator=`cat $outputDir/* | wc -l`
-#let numerator=$numerator*10000
-#let denominator=$expectedCount
-#let percent=$numerator/$denominator 
-#percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
-#echo
-#echo Iteration:$iter : Total Files: `ls $outputDir | wc -l` Total Lines: `cat $outputDir/* | wc -l` / $expectedCount msgs \($percent%\)
-#echo >> $TAGA_DIR/counts.txt
-#echo Iteration:$iter : Total Files: `ls $outputDir | wc -l` Total Lines: `cat $outputDir/* | wc -l` / $expectedCount msgs \($percent%\) >> $TAGA_DIR/counts.txt
-#
-
-
-
-
-
-
 
 
 
