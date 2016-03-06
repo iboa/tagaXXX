@@ -188,6 +188,9 @@ do
 
   # build Row output
 
+  # init the row cumulative
+  let row_cumulative=0
+
   # pad target name as necessary to have nice output
   tgtlen=`echo $target | awk '{print length($0)}'`
 
@@ -258,6 +261,9 @@ do
       # populate curcount from the curcount.txt file
       let curcount=`cat /tmp/curcount.txt`
 
+      # add this count to the cumulative
+      let row_cumulative=$row_cumulative+$curcount
+
       # pad as necessary
       let mycount=$curcount
       if [ $mycount -lt 10 ] ; then
@@ -289,6 +295,9 @@ do
     row="$row  $curcount"
 
   done # continue to next target
+
+  # append the cumulative row total to the row output
+  row="$row ............................ $row_cumulative"
 
   echo $row
   echo $row >> $TAGA_DIR/counts.txt
