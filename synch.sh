@@ -7,7 +7,7 @@ TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
 echo 
-echo $targetList
+#echo $targetList
 
 for target in $targetList
 do
