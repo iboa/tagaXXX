@@ -10,9 +10,9 @@ hostList=`$TAGA_DIR/hostList.sh`
 ####################################################
 # Test type - Multicast or Unicast, UDP or TCP
 ####################################################
-TESTTYPE="UCAST_TCP" # TCP UCAST
-TESTTYPE="UCAST_UDP" # UDP UCAST
 TESTTYPE="MCAST"     # UDP MCAST
+TESTTYPE="UCAST_UDP" # UDP UCAST
+TESTTYPE="UCAST_TCP" # TCP UCAST
 
 ####################################################
 # Portability Section, this section requires update 
@@ -22,6 +22,7 @@ MYLOGIN_ID=yourLoginIdGoesHere
 MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
+
 
 DAEMON1_IP=192.168.43.69
 DAEMON2_IP=192.168.43.124
@@ -152,19 +153,6 @@ source $TAGA_DIR/targetList.sh   > /dev/null # for NETADDRPART
 ##############################################
 # manually generated configs
 ##############################################
-DURATION1=20
-DURATION1=10
-DURATION2=10
-DURATION1=5
-DURATION2=5
-DURATION1=40
-DURATION2=40
-DURATION1=30
-DURATION2=30
-DURATION1=20
-DURATION2=20
-DURATION1=30
-DURATION2=20
 
 SERVER_INIT_DELAY=10
 SERVER_INIT_DELAY=20
@@ -178,7 +166,9 @@ MSGCOUNT=10000
 MSGCOUNT=1000
 MSGCOUNT=100
 MSGCOUNT=10
-MSGCOUNT=1000
+MSGCOUNT=500
+MSGCOUNT=20
+MSGCOUNT=100
 MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=5   # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=500 # 5 for five per second, 0.2 for each 5 seconds
@@ -186,10 +176,21 @@ MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=10 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=1 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=20 # 5 for five per second, 0.2 for each 5 seconds
 MSGLEN=1200
 MSGLEN=200
 MSGLEN=66
+MSGLEN=86
+MSGLEN=826
+
+# DURATION depends on rate and count above
+let DURATION1=$MSGCOUNT/$MSGRATE
+let DURATION1=$DURATION1+10
+#echo $DURATION1
+DURATION2=20
+DURATION2=10
 
 # try to disable traffic (MSGCOUNT == 0 does not work!)
 #MSGRATE=0.0 
