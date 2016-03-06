@@ -47,6 +47,7 @@ fi
 
 
 #####################################################
+# Build the Top Line of the File
 #####################################################
 #####################################################
 
@@ -60,10 +61,7 @@ for target in $targetList
 do
    # count the nodes we send our message to
    # check the test type
-#   if [ $TESTTYPE == "MCAST" ]; then
-#      # if MCAST, we send only one message per all nodes
-#      let expectedCount2=$expectedCount2+1
-#   else
+
       # if UCAST, we send a message to each node, except ourself
       for target2 in $targetList
       do
@@ -71,18 +69,10 @@ do
            let expectedCount2=$expectedCount2+1
         fi
       done
-#   fi
 
 done
 
 let expectedCount=$expectedCount*$expectedCount2
-
-#let numerator=`cat $outputDir/* | wc -l`
-#let numerator=$numerator-$expectedCount
-
-#if [ $TESTTYPE == "MCAST" ]; then
-#  let numerator=$grossReceivedCount
-#fi
 
 let numerator=$grossReceivedCount
 let printCount=$numerator
@@ -98,7 +88,6 @@ else
   percent=`echo $percent | cut -c1-2`.`echo $percent | cut -c3-4`
 fi
 
-
 # write to output
 echo
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\)
@@ -108,8 +97,8 @@ echo >> $TAGA_DIR/counts.txt
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
 
 
-
 #####################################################
+# Build the Second Line of the File
 #####################################################
 #####################################################
 # calculate the expected line count
@@ -120,24 +109,39 @@ for target in $targetList
 do
    # count the nodes we send our message to
    # check the test type
-#   if [ $TESTTYPE == "MCAST" ]; then
-#      # if MCAST, we send only one message per all nodes
-#      let expectedCount2=$expectedCount2+1
-#   else
-      # if UCAST, we send a message to each node, except ourself
-      for target2 in $targetList
-      do
-        if [ $target2 != $MYIP ]; then
-           let expectedCount2=$expectedCount2+1
-        fi
-      done
-#   fi
+
+   # if UCAST, we send a message to each node, except ourself
+   # but this expected message count is even valid for the MCAST 
+   # since we count on the receive side
+   for target2 in $targetList
+   do
+      if [ $target2 != $MYIP ]; then
+         let expectedCount2=$expectedCount2+1
+      fi
+   done
+
+   # accumulate the mcast sends counts
+   if [ $TESTTYPE == "MCAST" ]; then
+      # if MCAST, we send only one message per all nodes
+      let expectedCount3=$expectedCount3+1
+   fi
 
 done
 
+if [ $TESTTYPE == "MCAST" ]; then
+   let expectedCount=$expectedCount*1
+else
+   let expectedCount=$expectedCount*2
+fi
 
-let expectedCount=$expectedCount*2
-let expectedCount=$expectedCount*$expectedCount2
+if [ $TESTTYPE == "MCAST" ]; then
+   let expectedCount=$expectedCount*$expectedCount2
+   let expectedCount3=$expectedCount3*$MSGCOUNT
+   let expectedCount=$expectedCount+$expectedCount3
+else
+   let expectedCount=$expectedCount*$expectedCount2
+fi
+
 let numerator=`cat $outputDir/* | wc -l`
 let numerator=$numerator*10000
 let denominator=$expectedCount
@@ -155,7 +159,6 @@ echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $out
 
 # write to counts.txt file
 echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
-
 
 
 ##################################################################
