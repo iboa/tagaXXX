@@ -258,4 +258,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=10.0.0.27
+MASTER=localhost
