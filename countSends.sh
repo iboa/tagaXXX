@@ -23,22 +23,25 @@ cd $outputDir
 # get Gross Received Count
 let grossReceivedCount=0
 
+# TODO: UCAST grossReceiveCount Support needs added to eliminate
+# TODO: need for cludge several lines below
+
 # Get Multicast Received Counts
 if [ $TESTTYPE == "MCAST" ]; then
   for target in $targetList
   do
     HOST=`cat $TAGA_DIR/hostsToIps.txt | grep $target\\\. | cut -d"." -f 5`
     SOURCE_FILE_TAG=$TEST_DESCRIPTION\_$HOST\_*$target\_
-    echo $SOURCE_FILE_TAG* 
-    sleep 3
+    #echo $SOURCE_FILE_TAG* 
+    #sleep 3
      # more $SOURCE_FILE_TAG* 
-    cat $SOURCE_FILE_TAG* | wc -l 
-    cat $SOURCE_FILE_TAG* | grep -v $target | wc -l 
+    #cat $SOURCE_FILE_TAG* | wc -l 
+    #cat $SOURCE_FILE_TAG* | grep -v $target | wc -l 
     let targetReceivedCount=`cat $SOURCE_FILE_TAG* | grep -v $target | wc -l`
     let grossReceivedCount=$grossReceivedCount+$targetReceivedCount
-    echo gross:$grossReceivedCount
-    sleep 2
-    cat $SOURCE_FILE_TAG* | grep $target\\\. > /tmp/curcount.txt 2>/dev/null
+    #echo gross:$grossReceivedCount
+    #sleep 2
+    #cat $SOURCE_FILE_TAG* | grep $target\\\. > /tmp/curcount.txt 2>/dev/null
   done
 fi
 
