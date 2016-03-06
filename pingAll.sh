@@ -8,7 +8,7 @@ source $TAGA_DIR/config
 
 #PING_COUNT=10
 PING_COUNT=2
-SLEEP_TIME=1
+SLEEP_TIME=3
 
 MYGATEWAY=$NETADDRPART.1
 MYGATEWAY=`route | grep default | cut -c17-30`
