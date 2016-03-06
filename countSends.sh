@@ -96,11 +96,11 @@ fi
 
 # write to output
 echo
-echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\)
+echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\)
 
 # write to counts.txt file
 echo >> $TAGA_DIR/counts.txt
-echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
 
 
 #####################################################
@@ -166,10 +166,10 @@ else
 fi
 
 # write to output
-echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
+echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
 
 # write to counts.txt file
-echo Iteration:$iter : Total Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
 
 
 ##################################################################

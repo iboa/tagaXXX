@@ -14,11 +14,13 @@ source $TAGA_DIR/config
 rm $TAGA_DIR/hostsToIps.txt 2>/dev/null
 rm $TAGA_DIR/hostList.txt 2>/dev/null
 
+echo
+
 # build the hostList from the targetList
 for target in $targetList
 do
    processCount=`ssh -l $MYLOGIN_ID $target ps -ef | wc -l`           
-   echo $target 
+#   echo $target 
    targethostname=`ssh -l $MYLOGIN_ID $target hostname` 
    echo $target $targethostname \(process count: $processCount\)
    echo $targethostname >> /$TAGA_DIR/hostList.txt

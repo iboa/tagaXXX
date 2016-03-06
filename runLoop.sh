@@ -60,7 +60,9 @@ fi
 sleep 1
 
 # probe if enabled
-./probe.sh
+if [ $PROBE_ENABLED -eq 1 ]; then
+  ./probe.sh
+fi
 
 # get ping times if enabled
 if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
@@ -104,7 +106,9 @@ do
    sleep 1
 
    # probe if enabled
-   ./probe.sh
+   if [ $PROBE_ENABLED -eq 1 ]; then
+     ./probe.sh
+   fi
 
    # get ping times if enabled
    if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
