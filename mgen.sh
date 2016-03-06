@@ -153,7 +153,9 @@ do
   sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp2            > $TAGA_DIR/script.mgn       # finalize
 
   if [ $TESTTYPE == "UCAST_TCP" ]; then
-     echo 10.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
+     let tcpDelay=$MSGCOUNT/$MSGRATE
+     #echo 10.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
+     echo $tcpDelay.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
   fi
 
   # some cleanup
@@ -202,7 +204,9 @@ do
   sed -e s/len/$MSGLEN/g $TAGA_DIR/script.mgn.temp2            > $TAGA_DIR/script.mgn       # finalize
 
   if [ $TESTTYPE == "UCAST_TCP" ]; then
-     echo 10.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
+     let tcpDelay=$MSGCOUNT/$MSGRATE
+     #echo 10.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
+     echo $tcpDelay.0 OFF 1 >> $TAGA_DIR/script.mgn       # append TCP specific stuff
   fi
 
   # some cleanup
