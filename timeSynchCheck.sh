@@ -57,14 +57,14 @@ do
          echo "WARNING: Unable to obtain system time from $target"
          echo "WARNING: "
          echo
-         sleep 3
+         sleep 2
 
          if [ $STRICT_TIME_SYNCH -eq 0 ];  then 
            echo "WARNING: "
            echo "WARNING: Continuing without time synch check with $target ....."
            echo "WARNING: "
            echo
-           sleep 3
+           sleep 2
            # break from while loop
            break
          else
@@ -73,7 +73,7 @@ do
            echo "NOTE: To proceed without time synch, set STRICT_TIME_SYNCH  = 0 in config."
            echo NOTE:
            echo
-           sleep 3
+           sleep 2
          fi
        fi
 
@@ -83,7 +83,7 @@ do
       echo "WARNING: Unable to obtain system time from $target"
       echo "WARNING: "
       echo 
-      sleep 1
+      sleep 2
       continue
    fi
 
@@ -196,14 +196,14 @@ do
      echo "WARNING: Unable to obtain system time from $target"
      echo "WARNING: "
      echo
-     sleep 3
+     sleep 2
 
      if [ $STRICT_TIME_SYNCH -eq 0 ];  then 
        echo "WARNING: "
        echo "WARNING: Continuing without time synch check with $target ....."
        echo "WARNING: "
        echo
-       sleep 3
+       sleep 2
        # break from while loop
        break
      else
@@ -212,9 +212,8 @@ do
        echo "NOTE: To proceed without time synch, set STRICT_TIME_SYNCH  = 0 in config."
        echo NOTE:
        echo
-       sleep 3
+       sleep 2
      fi
-
    fi
 
    # resource the config in case the strict flag is modified
