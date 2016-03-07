@@ -20,6 +20,12 @@ fi
 # go to the output Directory for processing
 cd $outputDir
 
+
+echo
+echo >> $TAGA_DIR/counts.txt
+echo ==============================  TAGA  Iter: $iter  ==============================
+echo ==============================  TAGA  Iter: $iter  ============================== >>  $TAGA_DIR/counts.txt
+
 # calculate the aggregate commanded throughput rate
 let targetCount=0
 for target in $targetList
@@ -65,10 +71,10 @@ else
   megabitPrint=0.000
 fi
 
-echo
+#echo
 echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) 
 
-echo >> $TAGA_DIR/counts.txt
+#echo >> $TAGA_DIR/counts.txt
 echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) >> $TAGA_DIR/counts.txt
 
 
