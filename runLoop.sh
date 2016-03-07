@@ -206,7 +206,23 @@ do
    ./run.sh
 
    # Start of cycle tests
-   sleep $SERVER_INIT_DELAY
+   #sleep $SERVER_INIT_DELAY
+   let i=$SERVER_INIT_DELAY/2
+   while [ $i -gt 0 ]; 
+   do
+      let i=$i-1
+      echo Servers Initializing.... $i
+      sleep 2
+   done
+
+   #for i in 1 2 3 4 5 6 # 7 8 9 10 11
+   #do
+   #   let ticker=6-$i
+   #   echo Servers Initializing.... $ticker
+   #   sleep 2
+   #done
+   #sleep 2
+
 
    ./startOfCycleTests.sh & # run in background/parallel
 
