@@ -10,8 +10,8 @@ hostList=`$TAGA_DIR/hostList.sh`
 ####################################################
 # Test type - Multicast or Unicast, UDP or TCP
 ####################################################
-TESTTYPE="MCAST"     # UDP MCAST
 TESTTYPE="UCAST_TCP" # TCP UCAST
+TESTTYPE="MCAST"     # UDP MCAST
 TESTTYPE="UCAST_UDP" # UDP UCAST
 
 ####################################################
@@ -22,6 +22,7 @@ MYLOGIN_ID=yourLoginIdGoesHere
 MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
+
 
 DAEMON1_IP=192.168.43.69
 DAEMON2_IP=192.168.43.124
@@ -41,9 +42,9 @@ STRICT_TIME_SYNCH=1 # (Normal)
 RESOURCE_MON_ENABLED=0 # (Testing)
 RESOURCE_MON_ENABLED=1 # (Testing)
 let RESOURCE_DISPLAY_MODULUS=5
-let RESOURCE_DISPLAY_MODULUS=10
 let RESOURCE_DISPLAY_MODULUS=1000000
 let RESOURCE_DISPLAY_MODULUS=1
+let RESOURCE_DISPLAY_MODULUS=10
 
 # probe the targets?
 PROBE_ENABLED=1 # (Testing)
@@ -157,44 +158,48 @@ source $TAGA_DIR/targetList.sh   > /dev/null # for NETADDRPART
 # manually generated configs
 ##############################################
 
-SERVER_INIT_DELAY=10
 SERVER_INIT_DELAY=20
-SERVER_INIT_DELAY=10
 SERVER_INIT_DELAY=5
 SERVER_INIT_DELAY=10
 
-MSGCOUNT=3
-MSGCOUNT=5
-MSGCOUNT=10000
+# MGEN Traffic Configs
+# Message Count
 MSGCOUNT=1000
 MSGCOUNT=100
-MSGCOUNT=10
-MSGCOUNT=500
-MSGCOUNT=20
-MSGCOUNT=100
-MSGCOUNT=4
-MSGCOUNT=1
-MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
+
+# Message Rate
+# Note that fractional rates are not supported by the TAGA utility
+# Note that while fractional rates are supported by MGEN, those 
+# fractional rates are not supported by the TAGA utility
+#MSGRATE=0.2 # 5 for five per second, 0.2 for each 5 seconds
+#MSGRATE=0.1 # 5 for five per second, 0.1 for each 10 seconds
+
 MSGRATE=5   # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=500 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
-MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=10 # 5 for five per second, 0.2 for each 5 seconds
-MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
-MSGRATE=20 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=1 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=400 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=20 # 5 for five per second, 0.2 for each 5 seconds
+
+# Message Length
 MSGLEN=1200
-MSGLEN=200
-MSGLEN=66
-MSGLEN=86
-MSGLEN=826
+MSGLEN=120
+MSGLEN=94
+MSGLEN=94
+MSGLEN=894
+MSGLEN=194
 
 # DURATION depends on rate and count above
 let DURATION1=$MSGCOUNT/$MSGRATE
 #echo $DURATION1
 DURATION2=20
+DURATION2=40
 DURATION2=10
+DURATION2=20
 
 # try to disable traffic (MSGCOUNT == 0 does not work!)
 #MSGRATE=0.0 
@@ -210,9 +215,11 @@ DURATION2=10
 TESTONLY=0 # archiving enabled
 TESTONLY=1 # archiving disabled
 
-
+# MCAST config
 MYMCAST_ADDR="225.0.0.25"
 MYMCAST_PORT=8888
+
+# Ports
 SOURCEPORT=7760
 PORTBASE=7770
 
@@ -262,4 +269,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=192.168.43.208
+MASTER=192.168.43.124
