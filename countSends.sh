@@ -11,6 +11,15 @@ outputDir=$1
 iter=$2
 startTime=$3
 startDTG=$4
+deltaEpoch=$5
+
+# get the average iteration duration
+
+echo $deltaEpoch
+echo $iter
+echo averageDuration=$deltaEpoch/$iter
+
+let averageDuration=$deltaEpoch/$iter
 
 # archive directory processing
 if [ $TESTONLY -eq 1 ] ; then
@@ -20,13 +29,17 @@ fi
 # go to the output Directory for processing
 cd $outputDir
 
-echo
-echo >> $TAGA_DIR/counts.txt
+# add a line break and date to output and counts.txt
+echo; echo >> $TAGA_DIR/counts.txt
+date; date >> $TAGA_DIR/counts.txt
+
+# add the header
 echo ============================ TAGA Iteration:$iter ===========================
 echo ============================ TAGA Iteration:$iter =========================== >>  $TAGA_DIR/counts.txt
 
-echo `date` Iter:$iter StartDTG: $startTime $startDTG Test: $TESTTYPE
-echo `date` Iter:$iter StartDTG: $startTime $startDTG Test: $TESTTYPE >> $TAGA_DIR/counts.txt
+echo TAGA:iter:$iter avg:$averageDuration secs StartDTG:$startTime $startDTG Test:$TESTTYPE
+echo TAGA:iter:$iter avg:$averageDuration secs StartDTG:$startTime $startDTG Test:$TESTTYPE >> $TAGA_DIR/counts.txt
+#echo `date` Iter:$iter $averageDuration StartDTG: $startTime $startDTG Test: $TESTTYPE >> $TAGA_DIR/counts.txt
 
 # calculate the aggregate commanded throughput rate
 let targetCount=0
