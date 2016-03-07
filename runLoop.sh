@@ -57,7 +57,7 @@ echo;echo
 if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
   ./timeSynchCheck.sh
 fi
-sleep 1
+#sleep 1
 
 # probe if enabled
 if [ $PROBE_ENABLED -eq 1 ]; then
@@ -68,7 +68,7 @@ fi
 if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
   ./pingTimes.sh
 fi
-sleep 1
+#sleep 1
 
 # get resource usage if enabled
 if [ $RESOURCE_MON_ENABLED -eq 1 ]; then
@@ -103,7 +103,7 @@ do
    if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
      ./timeSynchCheck.sh
    fi
-   sleep 1
+   #sleep 1
 
    # probe if enabled
    if [ $PROBE_ENABLED -eq 1 ]; then
@@ -114,7 +114,7 @@ do
    if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
      ./pingTimes.sh
    fi
-   sleep 1
+   #sleep 1
 
    # get resource usage if enabled
    if [ $RESOURCE_MON_ENABLED -eq 1 ]; then
@@ -124,7 +124,7 @@ do
         ./wrapResourceUsage.sh
       fi
    fi
-   sleep 1
+   #sleep 1
 
    # new 15 jan 2016
    # Update the MASTER entry in the config
