@@ -284,7 +284,7 @@ echo >> $TAGA_DIR/counts.txt
 echo >> $TAGA_DIR/countsReceives.txt
 
 # Print the final (Totals) row
-row="Received Totals:.  $column_cumulative"
+row="Receiver Totals:.  $column_cumulative"
 echo $row
 echo $row >> $TAGA_DIR/counts.txt
 echo $row >> $TAGA_DIR/countsReceives.txt
