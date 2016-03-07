@@ -20,7 +20,6 @@ fi
 # go to the output Directory for processing
 cd $outputDir
 
-
 echo
 echo >> $TAGA_DIR/counts.txt
 echo ============================ TAGA Iteration:$iter ===========================
@@ -74,10 +73,7 @@ else
   megabitPrint=0.000
 fi
 
-#echo
 echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) 
-
-#echo >> $TAGA_DIR/counts.txt
 echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) >> $TAGA_DIR/counts.txt
 
 
@@ -116,32 +112,25 @@ fi
 let expectedCount=$MSGCOUNT
 let expectedCount2=0
 
-#let expectedCount3=0
-
 for target in $targetList
 do
    # count the nodes we send our message to
    # check the test type
-
-      # if UCAST, we send a message to each node, except ourself
-      for target2 in $targetList
-      do
-        if [ $target2 != $MYIP ]; then
-           let expectedCount2=$expectedCount2+1
-        fi
-      done
-
+   # if UCAST, we send a message to each node, except ourself
+   for target2 in $targetList
+   do
+     if [ $target2 != $MYIP ]; then
+       let expectedCount2=$expectedCount2+1
+     fi
+   done
 done
 
 let expectedCount=$expectedCount*$expectedCount2
 
 let numerator=$grossReceivedCount
 let printCount=$numerator
-
-let numerator=$numerator*10000
-let denominator=$expectedCount
+let numerator=$numerator*10000; let denominator=$expectedCount
 let percent=$numerator/$denominator 
-
 let checkValue=$numerator/10000 
 if [ $checkValue -eq $denominator ]; then
   percent="100.00"
@@ -154,14 +143,28 @@ else
   fi
 fi
 
+# write blank line to output; write blank line to counts.txt file
+echo; echo >> $TAGA_DIR/counts.txt
 
-# write to output
-echo
-echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\)
+# build up the buffer
+buffer1="TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Rec'd Count:$printCount / $expectedCount exp msgs "
+# pad the buffer
+buflen=`echo $buffer1 | awk '{print length($0)}'`
+let ROW_SIZE=66
+let ROW_SIZE=64
+let padlen=$ROW_SIZE-$buflen
+# add the padding
+let i=$padlen
+while [ $i -gt 0 ];
+do
+  buffer1="$buffer1."
+  let i=$i-1
+done
+# add the percent at the end of the buffer
+buffer2="$buffer1 ($percent%)"
 
-# write to counts.txt file
-echo >> $TAGA_DIR/counts.txt
-echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Rec\'d Count:$printCount / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+# write buffer line to output; write buffer line to counts.txt file
+echo $buffer2 ; echo $buffer2 >> $TAGA_DIR/counts.txt
 
 
 #####################################################
@@ -226,11 +229,36 @@ else
   fi
 fi
 
-# write to output
-echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
+# write blank line to output; write blank line to counts.txt file
+#echo; echo >> $TAGA_DIR/counts.txt
 
+# write to output
+#echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\)
 # write to counts.txt file
-echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+#echo TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:`cat $outputDir/* | wc -l` / $expectedCount exp msgs \($percent%\) >> $TAGA_DIR/counts.txt
+
+# build up the buffer
+printCount=`cat $outputDir/* | wc -l`
+buffer1="TAGA:Iter:$iter: Tot Files:`ls $outputDir | wc -l` Total Count:$printCount / $expectedCount exp msgs "
+# pad the buffer
+buflen=`echo $buffer1 | awk '{print length($0)}'`
+let ROW_SIZE=66
+let ROW_SIZE=64
+let padlen=$ROW_SIZE-$buflen
+# add the padding
+let i=$padlen
+while [ $i -gt 0 ];
+do
+  buffer1="$buffer1."
+  let i=$i-1
+done
+# add the percent at the end of the buffer
+buffer2="$buffer1 ($percent%)"
+
+# write buffer line to output; write buffer line to counts.txt file
+echo $buffer2 ; echo $buffer2 >> $TAGA_DIR/counts.txt
+
+
 
 
 ##################################################################
