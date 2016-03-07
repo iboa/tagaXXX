@@ -31,14 +31,14 @@ echo "$row" >> $TAGA_DIR/counts.txt
 
 row="   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20"
 if [ $NARROW_DISPLAY -eq 1 ]; then
-  row="1    2    3    4    5    6    7    8    9   10    Tot"
+  row="1    2    3    4    5    6    7    8    9    10   Tot"
 fi
 echo "SENDERS LIST      $row"
 echo "SENDERS LIST      $row" >> $TAGA_DIR/counts.txt
 
   row="------------     ---- ---- ---- ---- ---- ---- ---- ---- --- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----"
 if [ $NARROW_DISPLAY -eq 1 ]; then
-  row="------------      ---- ---- ---- ---- ---- ---- ---- ---- --- ----  ----"
+  row="------------      ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----"
 fi
 echo "$row"
 echo "$row" >> $TAGA_DIR/counts.txt
