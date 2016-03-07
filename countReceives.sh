@@ -207,6 +207,8 @@ do
 
   done # continue to next target
 
+  row="$row"" "
+
   # dlm temp
   let ROW_SIZE=66
   let rowlen=`echo $row | awk '{print length($0)}'`
@@ -221,8 +223,20 @@ do
      let i=$i-1
   done
 
+  # get the row padding
+  let valuelen=`echo $row_cumulative | awk '{print length($0)}'`
+  # pad it
+  if [ $valuelen -eq 3 ] ; then
+     row_cumulative=0$row_cumulative
+  elif [ $valuelen -eq 2 ] ; then
+     row_cumulative=00$row_cumulative
+  elif [ $valuelen -eq 1 ] ; then
+     row_cumulative=000$row_cumulative
+  else
+     echo nothing to pad >/dev/null
+  fi
+
   # append the cumulative row total to the row output
-  #row="$row ............................ $row_cumulative"
   row="$row $row_cumulative"
 
   echo $row
@@ -268,7 +282,6 @@ do
   value=`echo "${!v}"`
 
   let valuelen=`echo $value | awk '{print length($0)}'`
-
   # pad it
   if [ $valuelen -eq 3 ] ; then
      value=0$value
@@ -290,6 +303,8 @@ do
 
 done
 
+column_cumulative="$column_cumulative"" "
+
 # dlm temp
 let ROW_SIZE=50
 let ROW_SIZE=48
@@ -307,6 +322,23 @@ done
 
 #column_cumulative=$column_cumulative"............................. "`echo "${!v}"`
 #column_cumulative=$column_cumulative" ............................ "$column_cumulative_count
+column_cumulative="$column_cumulative"" "
+
+
+# get the padding
+let valuelen=`echo $column_cumulative_count | awk '{print length($0)}'`
+# pad it
+if [ $valuelen -eq 3 ] ; then
+  column_cumulative_count=0$column_cumulative_count
+elif [ $valuelen -eq 2 ] ; then
+  column_cumulative_count=00$column_cumulative_count
+elif [ $valuelen -eq 1 ] ; then
+  column_cumulative_count=000$column_cumulative_count
+else
+  echo nothing to pad >/dev/null
+fi
+
+# do it
 column_cumulative=$column_cumulative" "$column_cumulative_count
 
 # Print a space

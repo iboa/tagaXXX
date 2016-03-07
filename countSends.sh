@@ -26,6 +26,9 @@ echo >> $TAGA_DIR/counts.txt
 echo ============================ TAGA Iteration:$iter ===========================
 echo ============================ TAGA Iteration:$iter =========================== >>  $TAGA_DIR/counts.txt
 
+echo `date` Iteration:$iter StartDTG: $startTime $startDTG $TESTTYPE
+echo `date` Iteration:$iter StartDTG: $startTime $startDTG $TESTTYPE >> $TAGA_DIR/counts.txt
+
 # calculate the aggregate commanded throughput rate
 let targetCount=0
 for target in $targetList
@@ -354,6 +357,8 @@ do
 
   done # continue to next target
 
+  row="$row"" "
+
   # dlm temp
   let ROW_SIZE=66
   let rowlen=`echo $row | awk '{print length($0)}'`
@@ -364,12 +369,26 @@ do
   let i=$padlen
   while [ $i -gt 0 ];
   do
+     #row="$row"" "
      row="$row."
      let i=$i-1
   done
 
+
+  # get the row padding
+  let valuelen=`echo $row_cumulative | awk '{print length($0)}'`
+  # pad it
+  if [ $valuelen -eq 3 ] ; then
+     row_cumulative=0$row_cumulative
+  elif [ $valuelen -eq 2 ] ; then
+     row_cumulative=00$row_cumulative
+  elif [ $valuelen -eq 1 ] ; then
+     row_cumulative=000$row_cumulative
+  else
+     echo nothing to pad >/dev/null
+  fi
+
   # append the cumulative row total to the row output
-  #row="$row ............................ $row_cumulative"
   row="$row $row_cumulative"
 
   echo $row
