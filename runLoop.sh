@@ -93,6 +93,7 @@ let iter=0
 let k=0
 startTime="`date +%T`"
 startDTG="`date`"
+startEpoch=`date +%s`
 
 while true
 do
@@ -266,8 +267,15 @@ do
    rm -rf $OUTPUT_DIR/output
    cp -r $outputDir $OUTPUT_DIR/output
 
+   currentEpoch=`date +%s`
+   
+   #echo $startEpoch
+   #echo $currentEpoch
+   let deltaEpoch=$currentEpoch-$startEpoch
+
    # count and sort and display results matrix
-   ./countSends.sh $outputDir $iter $startTime $startDTG
+   # note, startDTG must be last param since includes spaces
+   ./countSends.sh $outputDir $iter $startTime $deltaEpoch $startDTG
    ./countReceives.sh $outputDir $iter $startTime $startDTG 
 
    for i in 1 2 3 4 5 6 # 7 8 9 10 11
