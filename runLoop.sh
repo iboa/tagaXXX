@@ -95,6 +95,14 @@ startTime="`date +%T`"
 startDTG="`date`"
 startEpoch=`date +%s`
 
+let beforeLastAvgDelta=0
+let lastAvgDelta=0
+let currentAvgDelta=0
+
+let lastEpoch=0
+
+printableAverageDeltaCum=""
+
 while true
 do
 
@@ -284,14 +292,53 @@ do
    cp -r $outputDir $OUTPUT_DIR/output
 
    currentEpoch=`date +%s`
+
+   #dlm temp
+   let currentDelta=$currentEpoch-$lastEpoch
+   let lastEpoch=$currentEpoch
    
    #echo $startEpoch
    #echo $currentEpoch
    let deltaEpoch=$currentEpoch-$startEpoch
 
+   #let currentAverage=$deltaEpoch/$iter
+
+
+# dlm temp
+ #these are really avgs not deltas
+let beforeLastAvgDelta=$lastAvgDelta
+let lastAvgDelta=$currentAvgDelta
+let currentAvgDelta=$deltaEpoch/$iter
+
+printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
+
+echo YES $printableAverageDeltaCum
+echo YES $printableAverageDeltaCum
+echo $printableAverageDeltaCum
+echo $printableAverageDeltaCum
+echo $printableAverageDeltaCum > /tmp/averageDeltaCum.out
+
+   # add if converged check here
+   # if .... 
+ 
+   if [ $beforeLastAvgDelta -eq $lastAvgDelta ] ; then
+      if [ $beforeLastAvgDelta -eq $currentAvgDelta ] ; then
+          echo Converged YES $currentAvgDelta is converged 
+          echo Converged YES $currentAvgDelta is converged 
+      else
+         echo NO NOT YET YES 1
+         echo NO NOT YET YES
+      fi
+    else
+       echo NO NOT YET YES 2
+       echo NO NOT YET YES
+   fi
+
+
+
    # count and sort and display results matrix
    # note, startDTG must be last param since includes spaces
-   ./countSends.sh $outputDir $iter $startTime $deltaEpoch $startDTG
+   ./countSends.sh $outputDir $iter $startTime $currentDelta $deltaEpoch $startDTG
    ./countReceives.sh $outputDir $iter $startTime $startDTG 
 
    for i in 1 2 3 4 5 6 # 7 8 9 10 11

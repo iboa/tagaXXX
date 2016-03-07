@@ -10,8 +10,9 @@ source $TAGA_DIR/config
 outputDir=$1
 iter=$2
 startTime=$3
-deltaEpoch=$4
-startDTG=$5
+currentDelta=$4
+deltaEpoch=$5
+startDTG=$6
 
 # get the average iteration duration
 
@@ -37,8 +38,8 @@ date; date >> $TAGA_DIR/counts.txt
 echo ============================ TAGA Iteration:$iter ===========================
 echo ============================ TAGA Iteration:$iter =========================== >>  $TAGA_DIR/counts.txt
 
-echo TAGA:iter:$iter StartDTG:$startTime Avg Dur:$averageDuration secs TestType:$TESTTYPE
-echo TAGA:iter:$iter StartDTG:$startTime Avg Dur:$averageDuration secs TestType:$TESTTYPE >> $TAGA_DIR/counts.txt
+echo TAGA:iter:$iter StartDTG:$startTime Dur:$currentDelta AvgDur:$averageDuration secs TestType:$TESTTYPE
+echo TAGA:iter:$iter StartDTG:$startTime Dur:$currentDelta AvgDur:$averageDuration secs TestType:$TESTTYPE >> $TAGA_DIR/counts.txt
 
 # calculate the aggregate commanded throughput rate
 let targetCount=0
