@@ -66,9 +66,9 @@ else
 fi
 
 echo
-echo TAGA: Injected Aggr Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) 
+echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) 
 echo >> $TAGA_DIR/counts.tx
-echo TAGA: Injected Aggr Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) >> $TAGA_DIR/counts.txt
+echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) >> $TAGA_DIR/counts.txt
 
 
 # get Gross Received Count
