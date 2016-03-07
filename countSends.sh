@@ -26,8 +26,8 @@ echo >> $TAGA_DIR/counts.txt
 echo ============================ TAGA Iteration:$iter ===========================
 echo ============================ TAGA Iteration:$iter =========================== >>  $TAGA_DIR/counts.txt
 
-echo `date` Iteration:$iter StartDTG: $startTime $startDTG $TESTTYPE
-echo `date` Iteration:$iter StartDTG: $startTime $startDTG $TESTTYPE >> $TAGA_DIR/counts.txt
+echo `date` Iter:$iter StartDTG: $startTime $startDTG Test: $TESTTYPE
+echo `date` Iter:$iter StartDTG: $startTime $startDTG Test: $TESTTYPE >> $TAGA_DIR/counts.txt
 
 # calculate the aggregate commanded throughput rate
 let targetCount=0
