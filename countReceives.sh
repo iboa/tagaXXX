@@ -207,8 +207,23 @@ do
 
   done # continue to next target
 
+  # dlm temp
+  let ROW_SIZE=66
+  let rowlen=`echo $row | awk '{print length($0)}'`
+#  echo $rowlen
+  let padlen=$ROW_SIZE-$rowlen
+
+  # add the padding
+  let i=$padlen
+  while [ $i -gt 0 ];
+  do
+     row="$row."
+     let i=$i-1
+  done
+
   # append the cumulative row total to the row output
-  row="$row ............................ $row_cumulative"
+  #row="$row ............................ $row_cumulative"
+  row="$row $row_cumulative"
 
   echo $row
   echo $row >> $TAGA_DIR/counts.txt
@@ -275,8 +290,24 @@ do
 
 done
 
+# dlm temp
+let ROW_SIZE=50
+let ROW_SIZE=48
+let rowlen=`echo $column_cumulative | awk '{print length($0)}'`
+#  echo $rowlen
+let padlen=$ROW_SIZE-$rowlen
+
+# add the padding
+let i=$padlen
+while [ $i -gt 0 ];
+do
+  column_cumulative=$column_cumulative.
+  let i=$i-1
+done
+
 #column_cumulative=$column_cumulative"............................. "`echo "${!v}"`
-column_cumulative=$column_cumulative" ............................ "$column_cumulative_count
+#column_cumulative=$column_cumulative" ............................ "$column_cumulative_count
+column_cumulative=$column_cumulative" "$column_cumulative_count
 
 # Print a space
 echo 
