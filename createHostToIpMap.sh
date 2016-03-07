@@ -29,6 +29,7 @@ do
    # pad the buffer
    buflen=`echo $buffer1 | awk '{print length($0)}'`
    let ROW_SIZE=56
+   let ROW_SIZE=52
    let padlen=$ROW_SIZE-$buflen
    # add the padding
    let i=$padlen
