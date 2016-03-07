@@ -67,7 +67,8 @@ fi
 
 echo
 echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) 
-echo >> $TAGA_DIR/counts.tx
+
+echo >> $TAGA_DIR/counts.txt
 echo TAGA:Iter:$iter: Commanded Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) >> $TAGA_DIR/counts.txt
 
 
