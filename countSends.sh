@@ -23,8 +23,8 @@ cd $outputDir
 
 echo
 echo >> $TAGA_DIR/counts.txt
-echo ==============================  TAGA  Iter: $iter  ==============================
-echo ==============================  TAGA  Iter: $iter  ============================== >>  $TAGA_DIR/counts.txt
+echo =============================== TAGA Iter:$iter ===============================
+echo =============================== TAGA Iter:$iter =============================== >>  $TAGA_DIR/counts.txt
 
 # calculate the aggregate commanded throughput rate
 let targetCount=0
