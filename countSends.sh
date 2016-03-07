@@ -20,6 +20,57 @@ fi
 # go to the output Directory for processing
 cd $outputDir
 
+# calculate the aggregate commanded throughput rate
+let targetCount=0
+for target in $targetList
+do
+   let targetCount=$targetCount+1
+done
+
+let BITS_PER_BYTE=8
+let commandedRate=$MSGRATE*$targetCount*$MSGLEN*$BITS_PER_BYTE
+let megabitRate=$commandedRate*1000/1000000
+let kilobitRate=$commandedRate*1000/1000
+
+#echo kilobitrate: $kilobitRate
+
+# pad target name as necessary to have nice output
+let ratelen=`echo $commandedRate | awk '{print length($0)}'`
+#echo $ratelen
+if [ $ratelen -eq 8 ]; then
+  megabitPrint=`echo $megabitRate | cut -c1-2`.`echo $megabitRate | cut -c3-4`
+  #kilobitPrint=`echo $kilobitRate `
+  let kilobitPrint=$kilobitRate/1000
+elif [ $ratelen -eq 7 ]; then
+  megabitPrint=`echo $megabitRate | cut -c1`.`echo $megabitRate | cut -c2-4`
+  #kilobitPrint=`echo $kilobitRate `
+  let kilobitPrint=$kilobitRate/1000
+elif [ $ratelen -eq 6 ]; then
+  megabitPrint=0.`echo $megabitRate | cut -c1-3`
+  #kilobitPrint=`echo $kilobitRate `
+  let kilobitPrint=$kilobitRate/1000
+elif [ $ratelen -eq 5 ]; then
+  megabitPrint=0.0`echo $megabitRate | cut -c1-2`
+  kilobitPrint=`echo $kilobitRate | cut -c1-2`.`echo $kilobitRate | cut -c3-4`
+elif [ $ratelen -eq 4 ]; then
+  megabitPrint=0.00`echo $megabitRate | cut -c1`
+  kilobitPrint=`echo $kilobitRate | cut -c1`.`echo $kilobitRate | cut -c2-4`
+elif [ $ratelen -eq 3 ]; then
+  megabitPrint=0.000
+  kilobitPrint=0.`echo $kilobitRate | cut -c1-3`
+elif [ $ratelen -eq 2 ]; then
+  megabitPrint=0.000
+  kilobitPrint=0.0`echo $kilobitRate | cut -c1-2`
+else
+  megabitPrint=0.000
+fi
+
+echo
+echo TAGA: Injected Aggr Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) 
+echo >> $TAGA_DIR/counts.tx
+echo TAGA: Injected Aggr Throughput: $commandedRate bps \($kilobitPrint kbps\)  \($megabitPrint mbps\) >> $TAGA_DIR/counts.txt
+
+
 # get Gross Received Count
 let grossReceivedCount=0
 
