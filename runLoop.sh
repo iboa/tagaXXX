@@ -101,6 +101,7 @@ let currentAvgDelta=0
 
 let lastEpoch=0
 
+printableDeltaCum=""
 printableAverageDeltaCum=""
 
 while true
@@ -310,11 +311,16 @@ let beforeLastAvgDelta=$lastAvgDelta
 let lastAvgDelta=$currentAvgDelta
 let currentAvgDelta=$deltaEpoch/$iter
 
+printableDeltaCum="$printableDeltaCum $currentDelta"
 printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
 
-echo YES $printableAverageDeltaCum
-echo YES $printableAverageDeltaCum
-echo $printableAverageDeltaCum
+#echo YES $printableAverageDeltaCum
+#echo YES $printableAverageDeltaCum
+#echo $printableAverageDeltaCum
+
+echo $printableDeltaCum
+echo $printableDeltaCum > /tmp/deltaCum.out
+
 echo $printableAverageDeltaCum
 echo $printableAverageDeltaCum > /tmp/averageDeltaCum.out
 
