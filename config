@@ -24,20 +24,6 @@ MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
 
-# dlm temp TESTING REMOVE after TEST
-PROTO_UNDER_TEST="RESTCONF" # (Normal1)
-PROTO="RESTCONF_FORCE" # (Testing1)
-PROTO="NETCONF_FORCE" # (Testing2)
-PROTO="NETCONF" # (Normal2)
-PROTO="RESTCONF" # (Normal1)
-MYLOGIN_ID=darrin
-MYPASSWD=roller123
-COMMAND=yangcli-pro
-OLDPROCFILE3="/home/$MYLOGIN_ID/python/python.pid"
-#OLDPROCFILE3="/home/darrin/python/python.pid"
-# dlm temp end TESTING REMOVE after TEST
-
-
 DAEMON1_IP=192.168.43.69
 DAEMON2_IP=192.168.43.124
 
