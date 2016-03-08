@@ -11,10 +11,15 @@ NEW_LOCATION_REPLACE_STRING="\\/tmp\\/iboa"
 
 mkdir -p $NEW_LOCATION
 
+for file in config
+do
+  echo $file
+  cat $file | sed s/~\\/scripts\\/taga/$NEW_LOCATION_REPLACE_STRING/g > $NEW_LOCATION/$file
+done
+
 for file in *.sh #config
 do
   echo $file
-  #cat $file | sed s/~\\/scripts\\/taga/~\\/scripts\\/taga/g > $NEW_LOCATION/$file
   cat $file | sed s/~\\/scripts\\/taga/$NEW_LOCATION_REPLACE_STRING/g > $NEW_LOCATION/$file
 done
 
@@ -25,9 +30,9 @@ do
    diff $file `basename $file`
 done
 
-# copy the non-script files
-others="config *.template"
-cp $others $NEW_LOCATION
+# copy the additional files
+others="*.template passwd.txt code"
+cp -r $others $NEW_LOCATION
 
 # change to the new location
 cd $NEW_LOCATION
