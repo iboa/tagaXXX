@@ -8,8 +8,8 @@ source $TAGA_DIR/config
 
 NEW_LOCATION=/tmp/iboa
 NEW_LOCATION_REPLACE_STRING="\\/tmp\\/iboa"
-#NEW_LOCATION=/opt/iboa
-#NEW_LOCATION_REPLACE_STRING="\\/opt\\/iboa"
+NEW_LOCATION=/opt/iboa
+NEW_LOCATION_REPLACE_STRING="\\/opt\\/iboa"
 
 sudo mkdir -p $NEW_LOCATION
 sudo chmod 777 $NEW_LOCATION
