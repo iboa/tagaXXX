@@ -8,19 +8,22 @@ source $TAGA_DIR/config
 
 NEW_LOCATION=/tmp/iboa
 NEW_LOCATION_REPLACE_STRING="\\/tmp\\/iboa"
+#NEW_LOCATION=/opt/iboa
+#NEW_LOCATION_REPLACE_STRING="\\/opt\\/iboa"
 
-mkdir -p $NEW_LOCATION
+sudo mkdir -p $NEW_LOCATION
+sudo chmod 777 $NEW_LOCATION
 
 for file in config
 do
   echo $file
-  cat $file | sed s/~\\/scripts\\/taga/$NEW_LOCATION_REPLACE_STRING/g > $NEW_LOCATION/$file
+  sudo cat $file | sed s/~\\/scripts\\/taga/$NEW_LOCATION_REPLACE_STRING/g > $NEW_LOCATION/$file
 done
 
 for file in *.sh #config
 do
   echo $file
-  cat $file | sed s/~\\/scripts\\/taga/$NEW_LOCATION_REPLACE_STRING/g > $NEW_LOCATION/$file
+  sudo cat $file | sed s/~\\/scripts\\/taga/$NEW_LOCATION_REPLACE_STRING/g > $NEW_LOCATION/$file
 done
 
 for file in $NEW_LOCATION/*.sh
@@ -32,10 +35,7 @@ done
 
 # copy the additional files
 others="*.template passwd.txt code"
-cp -r $others $NEW_LOCATION
+sudo cp -r $others $NEW_LOCATION
 
-# change to the new location
-cd $NEW_LOCATION
-pwd
-#ls -lrt
+echo; echo New TAGA Location: $NEW_LOCATION; echo
 
