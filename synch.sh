@@ -6,8 +6,10 @@
 #TAGA_DIR=/opt/iboa
 
 TAGA_DIR=~/scripts/taga
+TAGA_DIR=`pwd`
 source $TAGA_DIR/config
 
+#for target in 10.0.0.20
 for target in $targetList
 do
    if [ $target == $MYIP ]; then
@@ -36,6 +38,11 @@ do
    ssh -l $MYLOGIN_ID $target "sudo mkdir -p $TAGA_DIR   2>/dev/null"
    ssh -l $MYLOGIN_ID $target "sudo chmod 777 $TAGA_DIR  2>/dev/null"
    scp -r $SCP_SOURCE_STR $MYLOGIN_ID@$target:$TAGA_DIR <$TAGA_DIR/passwd.txt
+
+   # update the links to the new dir
+#   ssh -l $MYLOGIN_ID $target "rm ~/scripts/taga 2>/dev/null"
+#   #ssh -l $MYLOGIN_ID $target "ln -s $TAGA_DIR ~/scripts/taga 2>/dev/null"
+#   ssh -l $MYLOGIN_ID $target "ln -s $TAGA_DIR ~/scripts/taga 2>/dev/null"
 
    # clean up old OBE scripts (run once per file in all environs)
    # but check the flag first
