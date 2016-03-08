@@ -3,13 +3,8 @@
 # All Rights Reserved
 #####################################################
 
-TAGA_DIR=~/scripts/taga
+TAGA_DIR=/opt/iboa
 source $TAGA_DIR/config
-
-mkdir -p $TAGA_DiR 2>/dev/null
-
-echo 
-#echo $targetList
 
 for target in $targetList
 do
@@ -29,7 +24,10 @@ do
    SCP_SOURCE_STR="$SCP_SOURCE_STR *.template"
 
    # send the files to the destination
-   ssh -l $MYLOGIN_ID $target "mkdir $TAGA_DIR 2>/dev/null"
+   # ssh -l $MYLOGIN_ID $target "sudo mkdir $TAGA_DiR  2>/dev/null"
+   # ssh -l $MYLOGIN_ID $target "sudo chmod 777 $TAGA_DIR  2>/dev/null"
+   ssh -l $MYLOGIN_ID $target "sudo mkdir /opt/iboa  2>/dev/null"
+   ssh -l $MYLOGIN_ID $target "sudo chmod 777 /opt/iboa  2>/dev/null"
    scp $SCP_SOURCE_STR $MYLOGIN_ID@$target:$TAGA_DIR <$TAGA_DIR/passwd.txt
 
    # clean up old OBE scripts (run once per file in all environs)
