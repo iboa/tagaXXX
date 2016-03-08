@@ -3,7 +3,7 @@
 ####################################################
 SCRIPTS_DIR=$HOME/scripts
 TAGA_DIR=$SCRIPTS_DIR/taga
-TAGA_DIR=~/scripts/taga
+TAGA_DIR=~/scripts/taga # new mar 2016, relocateable
 touch $TAGA_DIR/hostList.sh
 touch $TAGA_DIR/hostList.txt
 hostList=`$TAGA_DIR/hostList.sh`
@@ -244,7 +244,10 @@ INTERFACE=`ifconfig | grep $NETADDRPART -B1 | head -n 1 | cut -d" " -f1`
 ##############################################
 SCRIPTS_DIR=$HOME/scripts
 TAGA_DIR=$SCRIPTS_DIR/taga
+TAGA_DIR=~/scripts/taga # new mar 2016, relocateable
 OUTPUT_DIR=$SCRIPTS_DIR/taga/output
+OUTPUT_DIR=$TAGA_DIR/output # new mar 2016
+LOG_DIIR=/tmp/iboa/log # new mar 2016
 hostList=`$TAGA_DIR/hostList.sh`
 touch $TAGA_DIR/hostList.sh
 MY_NODE=`/sbin/ifconfig | grep $NETADDRPART | cut -d: -f 2 | cut -d. -f 3`
