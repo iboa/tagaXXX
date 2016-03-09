@@ -95,6 +95,9 @@ startTime="`date +%T`"
 startDTG="`date`"
 startEpoch=`date +%s`
 
+# five iterations to converge
+let beforeLastLastLastAvgDelta=0
+let beforeLastLastAvgDelta=0
 let beforeLastAvgDelta=0
 let lastAvgDelta=0
 let currentAvgDelta=0
@@ -170,7 +173,7 @@ do
    done
 
    if [ $STEPWISE_ITERATIONS -eq 1 ]; then
-      echo; echo INFO: step-wise iterations configured...
+      echo; echo INFO: Step-wise iterations configured...
       echo `date` Iterations \($iter\) Reached - Waiting confirmation to proceed
       echo Enter any key to proceed...
       read input 
@@ -325,49 +328,82 @@ do
 
    #let currentAverage=$deltaEpoch/$iter
 
-
-# dlm temp
- #these are really avgs not deltas
-let beforeLastAvgDelta=$lastAvgDelta
-let lastAvgDelta=$currentAvgDelta
-let currentAvgDelta=$deltaEpoch/$iter
-
-printableDeltaCum="$printableDeltaCum $currentDelta"
-printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
+   printableDeltaCum="$printableDeltaCum $currentDelta"
+   printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
 
 #echo YES $printableAverageDeltaCum
 #echo YES $printableAverageDeltaCum
 #echo $printableAverageDeltaCum
 
-echo $printableDeltaCum
-echo $printableDeltaCum > /tmp/deltaCum.out
+   #############################################################
+   # create the log dir
+   #############################################################
+   mkdir -p $LOG_DIR
 
-# make the log dir
-mkdir -p $LOG_DIR
-echo $printableDeltaCum > $LOG_DIR/deltaCum.out
-echo $printableDeltaCum > $LOG_DIR/_deltaCum.out
-echo $printableDeltaCum > $LOG_DIR/d_deltaCum.out
+   #############################################################
+   # Print to the Delta Cumlative Log File
+   #############################################################
 
-echo $printableAverageDeltaCum
-echo $printableAverageDeltaCum > /tmp/averageDeltaCum.out
-echo $printableAverageDeltaCum > $LOG_DIR/averageDeltaCum.out
-echo $printableAverageDeltaCum > $LOG_DIR/_averageDeltaCum.out
-echo $printableAverageDeltaCum > $LOG_DIR/d_averageDeltaCum.out
+   # special handling for iteration 1
+   if [ $iter -eq 1 ]; then
+     echo $printableAverageDeltaCum
+     echo $printableAverageDeltaCum > /tmp/deltaCum.out
+     # make the log dir
+     echo $printableAverageDeltaCum > $LOG_DIR/deltaCum.out
+     echo $printableAverageDeltaCum > $LOG_DIR/_deltaCum.out
+     echo $printableAverageDeltaCum > $LOG_DIR/d_deltaCum.out
+   else
+     echo $printableDeltaCum
+     echo $printableDeltaCum > /tmp/deltaCum.out
+     # make the log dir
+     mkdir -p $LOG_DIR
+     echo $printableDeltaCum > $LOG_DIR/deltaCum.out
+     echo $printableDeltaCum > $LOG_DIR/_deltaCum.out
+     echo $printableDeltaCum > $LOG_DIR/d_deltaCum.out
+   fi
+
+   #############################################################
+   # Print to the Average Delta Cumlative Log File
+   #############################################################
+
+   echo $printableAverageDeltaCum
+   echo $printableAverageDeltaCum > /tmp/averageDeltaCum.out
+   echo $printableAverageDeltaCum > $LOG_DIR/averageDeltaCum.out
+   echo $printableAverageDeltaCum > $LOG_DIR/_averageDeltaCum.out
+   echo $printableAverageDeltaCum > $LOG_DIR/d_averageDeltaCum.out
+
+   #these are really avgs not deltas
+   let beforeLastLastLastAvgDelta=$beforeLastLastAvgDelta
+   let beforeLastLastAvgDelta=$beforeLastAvgDelta
+   let beforeLastAvgDelta=$lastAvgDelta
+   let lastAvgDelta=$currentAvgDelta
+   let currentAvgDelta=$deltaEpoch/$iter
 
    # add if converged check here
-   # if .... 
- 
+
+   if [ $beforeLastLastLastAvgDelta -eq $beforeLastLastAvgDelta ] ; then
+   if [ $beforeLastLastAvgDelta -eq $beforeLastAvgDelta ] ; then
    if [ $beforeLastAvgDelta -eq $lastAvgDelta ] ; then
       if [ $beforeLastAvgDelta -eq $currentAvgDelta ] ; then
-          echo Converged YES $currentAvgDelta is converged 
-          echo Converged YES $currentAvgDelta is converged 
+          echo Converged: $currentAvgDelta has converged 
+          echo Converged: $currentAvgDelta has converged 
+          echo Converged: $currentAvgDelta has converged 
+          echo Converged: $currentAvgDelta has converged 
+          echo Converged: $currentAvgDelta has converged 
+          echo Converged: $currentAvgDelta has converged 
+          echo Converged: $currentAvgDelta has converged >> counts.txt
+          echo Converged: $currentAvgDelta has converged >> counts.txt
+          echo Converged: $currentAvgDelta has converged >> counts.txt
+          echo Converged: $currentAvgDelta has converged >> counts.txt
+          echo Converged: $currentAvgDelta has converged >> counts.txt
+          echo Converged: $currentAvgDelta has converged >> counts.txt
       else
-         echo NO NOT YET YES 1
-         echo NO NOT YET YES
+         echo Not Converged marker 1
       fi
     else
-       echo NO NOT YET YES 2
-       echo NO NOT YET YES
+      echo Not Converged marker 2
+   fi
+   fi
    fi
 
 
