@@ -169,6 +169,13 @@ do
       sleep 5
    done
 
+   if [ $STEPWISE_ITERATIONS -eq 1 ]; then
+      echo; echo INFO: step-wise iterations configured...
+      echo `date` Iterations \($iter\) Reached - Waiting confirmation to proceed
+      echo Enter any key to proceed...
+      read input 
+   fi
+
    # Increment the iterator
    let iter=$iter+1
 
