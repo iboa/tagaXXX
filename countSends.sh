@@ -19,8 +19,11 @@ startDTG=$6
 echo $deltaEpoch
 echo $iter
 echo averageDuration=$deltaEpoch/$iter
-
 let averageDuration=$deltaEpoch/$iter
+# special handling for iteration 1
+if [ $iter -eq 1 ]; then
+   let currentDelta=$averageDuration 
+fi
 
 # archive directory processing
 if [ $TESTONLY -eq 1 ] ; then
