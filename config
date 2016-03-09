@@ -9,6 +9,17 @@ touch $TAGA_DIR/hostList.txt
 hostList=`$TAGA_DIR/hostList.sh`
 
 ####################################################
+# Enable or Disable all testing per iteration loop
+####################################################
+ALL_TESTS_DISABLED=1 # disable all tests (Testing)
+ALL_TESTS_DISABLED=0 # enable all tests (Normal)
+MAX_ITERATIONS=2       # max iterations (Testing)
+MAX_ITERATIONS=1       # max iterations (Testing)
+MAX_ITERATIONS=1000000 # max iterations (Normal)
+STEPWISE_ITERATIONS=0  # Normal
+STEPWISE_ITERATIONS=1  # Testing
+
+####################################################
 # Test type - Multicast or Unicast, UDP or TCP
 ####################################################
 TESTTYPE="UCAST_TCP" # TCP UCAST
@@ -58,15 +69,6 @@ PROBE_ENABLED=0 # (Normal)
 # get ping times?
 PING_TIME_CHECK_ENABLED=1 # (Testing)
 PING_TIME_CHECK_ENABLED=0 # (Normal)
-
-####################################################
-# Enable or Disable all testing per iteration loop
-####################################################
-ALL_TESTS_DISABLED=1 # disable all tests (Testing)
-ALL_TESTS_DISABLED=0 # enable all tests (Normal)
-MAX_ITERATIONS=1000000 # max iterations (Normal)
-MAX_ITERATIONS=2       # max iterations (Testing)
-MAX_ITERATIONS=1       # max iterations (Testing)
 
 ##############################################
 # ENVIRON SIMULATION SWITCHES
