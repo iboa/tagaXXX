@@ -104,7 +104,7 @@ let currentAvgDelta=0
 
 let lastEpoch=0
 
-LAST_CONVERGED="Never Converged"
+LAST_CONVERGED="Not Yet Converged"
 
 printableDeltaCum=""
 printableAverageDeltaCum=""
@@ -418,6 +418,9 @@ do
    echo LastConverged: $LAST_CONVERGED >> counts.txt
    echo LastConverged: $LAST_CONVERGED >> counts.txt
    echo LastConverged: $LAST_CONVERGED >> counts.txt
+
+   # new header
+   echo `date` LastConverged: $LAST_CONVERGED >> counts.txt
 
 
 
