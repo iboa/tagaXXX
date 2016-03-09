@@ -325,12 +325,15 @@ do
    # special handling for iteration 1
    if [ $iter -eq 1 ]; then
       # use the delta epoch instead of current delta
-      printableDeltaCum="$printableDeltaCum $deltaEpoch"
+      #printableDeltaCum="$printableDeltaCum $deltaEpoch"
+      printableDeltaCum="$printableDeltaCum 00"
+      #printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
+      printableAverageDeltaCum="$printableAverageDeltaCum 00"
    else 
       printableDeltaCum="$printableDeltaCum $currentDelta"
+      printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
    fi
 
-   printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
 
    #############################################################
    # create the log dir
@@ -342,14 +345,14 @@ do
    #############################################################
 
    # special handling for iteration 1
-   if [ $iter -eq 1 ]; then
-     echo $printableAverageDeltaCum
-     echo $printableAverageDeltaCum > /tmp/deltaCum.out
-     # make the log dir
-     echo $printableAverageDeltaCum > $LOG_DIR/deltaCum.out
-     echo $printableAverageDeltaCum > $LOG_DIR/_deltaCum.out
-     echo $printableAverageDeltaCum > $LOG_DIR/d_deltaCum.out
-   else
+   #if [ $iter -eq 1 ]; then
+   #  echo $printableAverageDeltaCum
+   #  echo $printableAverageDeltaCum > /tmp/deltaCum.out
+   #  # make the log dir
+   #  echo $printableAverageDeltaCum > $LOG_DIR/deltaCum.out
+   #  echo $printableAverageDeltaCum > $LOG_DIR/_deltaCum.out
+   #  echo $printableAverageDeltaCum > $LOG_DIR/d_deltaCum.out
+   #else
      echo $printableDeltaCum
      echo $printableDeltaCum > /tmp/deltaCum.out
      # make the log dir
@@ -357,7 +360,7 @@ do
      echo $printableDeltaCum > $LOG_DIR/deltaCum.out
      echo $printableDeltaCum > $LOG_DIR/_deltaCum.out
      echo $printableDeltaCum > $LOG_DIR/d_deltaCum.out
-   fi
+   #fi
 
    #############################################################
    # Print to the Average Delta Cumlative Log File
