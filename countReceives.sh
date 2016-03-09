@@ -308,6 +308,7 @@ column_cumulative="$column_cumulative"" "
 # dlm temp
 let ROW_SIZE=50
 let ROW_SIZE=48
+let ROW_SIZE=49
 let rowlen=`echo $column_cumulative | awk '{print length($0)}'`
 #  echo $rowlen
 let padlen=$ROW_SIZE-$rowlen
@@ -347,7 +348,7 @@ echo >> $TAGA_DIR/counts.txt
 echo >> $TAGA_DIR/countsReceives.txt
 
 # Print the final (Totals) row
-row="Receiver Totals:.  $column_cumulative"
+row="Receiver Totals:  $column_cumulative"
 echo $row
 echo $row >> $TAGA_DIR/counts.txt
 echo $row >> $TAGA_DIR/countsReceives.txt
