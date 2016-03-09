@@ -10,14 +10,15 @@ hostList=`$TAGA_DIR/hostList.sh`
 
 ####################################################
 # Enable or Disable all testing per iteration loop
+# and other Main Test Iteration Configs
 ####################################################
 ALL_TESTS_DISABLED=1 # disable all tests (Testing)
 ALL_TESTS_DISABLED=0 # enable all tests (Normal)
 MAX_ITERATIONS=2       # max iterations (Testing)
 MAX_ITERATIONS=1       # max iterations (Testing)
 MAX_ITERATIONS=1000000 # max iterations (Normal)
-STEPWISE_ITERATIONS=0  # Normal
 STEPWISE_ITERATIONS=1  # Testing
+STEPWISE_ITERATIONS=0  # Normal
 
 ####################################################
 # Test type - Multicast or Unicast, UDP or TCP
@@ -30,6 +31,8 @@ TESTTYPE="UCAST_UDP" # UDP UCAST
 # Dynamic Testing
 ####################################################
 VARIABLE_TEST="var_test.sh"
+
+REBOOT_ONE_LIST=10.0.0.21
 
 ####################################################
 # Portability Section, this section requires update 
@@ -177,6 +180,7 @@ SERVER_INIT_DELAY=10
 MSGCOUNT=1000
 MSGCOUNT=100
 MSGCOUNT=10
+MSGCOUNT=20
 
 # Message Rate
 # Note that fractional rates are not supported by the TAGA utility
@@ -285,4 +289,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=192.168.43.124
+MASTER=10.0.0.27
