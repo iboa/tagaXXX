@@ -104,6 +104,8 @@ let currentAvgDelta=0
 
 let lastEpoch=0
 
+LAST_CONVERGED="Never Converged"
+
 printableDeltaCum=""
 printableAverageDeltaCum=""
 
@@ -397,6 +399,10 @@ do
           echo Converged: $currentAvgDelta has converged >> counts.txt
           echo Converged: $currentAvgDelta has converged >> counts.txt
           echo Converged: $currentAvgDelta has converged >> counts.txt
+
+          # store it
+          LAST_CONVERGED=$currentAvgDelta
+
       else
          echo Not Converged marker 1
       fi
@@ -405,6 +411,13 @@ do
    fi
    fi
    fi
+
+   echo LastConverged: $LAST_CONVERGED >> counts.txt
+   echo LastConverged: $LAST_CONVERGED >> counts.txt
+   echo LastConverged: $LAST_CONVERGED >> counts.txt
+   echo LastConverged: $LAST_CONVERGED >> counts.txt
+   echo LastConverged: $LAST_CONVERGED >> counts.txt
+   echo LastConverged: $LAST_CONVERGED >> counts.txt
 
 
 

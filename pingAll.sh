@@ -22,9 +22,12 @@ do
    echo
 
    # ping the gateway!
+   echo PINGING GATEWAY: $MYGATEWAY; echo
    ping -c $PING_COUNT $MYGATEWAY
 
    sleep $SLEEP_TIME
+
+   echo; echo PINGING TARGETS: $targetList
 
    for target in $targetList
    do
