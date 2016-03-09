@@ -321,8 +321,17 @@ printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
 echo $printableDeltaCum
 echo $printableDeltaCum > /tmp/deltaCum.out
 
+# make the log dir
+mkdir -p $LOG_DIR
+echo $printableDeltaCum > $LOG_DIR/deltaCum.out
+echo $printableDeltaCum > $LOG_DIR/_deltaCum.out
+echo $printableDeltaCum > $LOG_DIR/d_deltaCum.out
+
 echo $printableAverageDeltaCum
 echo $printableAverageDeltaCum > /tmp/averageDeltaCum.out
+echo $printableAverageDeltaCum > $LOG_DIR/averageDeltaCum.out
+echo $printableAverageDeltaCum > $LOG_DIR/_averageDeltaCum.out
+echo $printableAverageDeltaCum > $LOG_DIR/d_averageDeltaCum.out
 
    # add if converged check here
    # if .... 
