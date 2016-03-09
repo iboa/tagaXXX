@@ -6,12 +6,5 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
-IP_TO_KEEP_ALIVE=192.168.43.208
-ITFC_TO_KEEP_ALIVE=wlp2s0
-
-while true
-do
-  sudo ifconfig $ITFC_TO_KEEP_AliVE $IP_TO_KEEP_ALIVE up
-  sleep 60
-  date
-done
+echo `date` : $MYIP : $0 : Executing...
+echo `date` : $MYIP : $0 : Exiting...

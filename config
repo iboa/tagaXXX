@@ -16,6 +16,11 @@ TESTTYPE="MCAST"     # UDP MCAST
 TESTTYPE="UCAST_UDP" # UDP UCAST
 
 ####################################################
+# Dynamic Testing
+####################################################
+VARIABLE_TEST="var_test.sh"
+
+####################################################
 # Portability Section, this section requires update 
 # after port to new system
 ####################################################
@@ -59,6 +64,9 @@ PING_TIME_CHECK_ENABLED=0 # (Normal)
 ####################################################
 ALL_TESTS_DISABLED=1 # disable all tests (Testing)
 ALL_TESTS_DISABLED=0 # enable all tests (Normal)
+MAX_ITERATIONS=1000000 # max iterations (Normal)
+MAX_ITERATIONS=2       # max iterations (Testing)
+MAX_ITERATIONS=1       # max iterations (Testing)
 
 ##############################################
 # ENVIRON SIMULATION SWITCHES
@@ -166,6 +174,7 @@ SERVER_INIT_DELAY=10
 # Message Count
 MSGCOUNT=1000
 MSGCOUNT=100
+MSGCOUNT=10
 
 # Message Rate
 # Note that fractional rates are not supported by the TAGA utility
@@ -184,6 +193,7 @@ MSGRATE=100 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=200 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=400 # 5 for five per second, 0.2 for each 5 seconds
 MSGRATE=20 # 5 for five per second, 0.2 for each 5 seconds
+MSGRATE=2 # 5 for five per second, 0.2 for each 5 seconds
 
 # Message Length
 MSGLEN=1200
@@ -192,14 +202,15 @@ MSGLEN=94
 MSGLEN=94
 MSGLEN=894
 MSGLEN=194
+MSGLEN=94
 
 # DURATION depends on rate and count above
 let DURATION1=$MSGCOUNT/$MSGRATE
 #echo $DURATION1
 DURATION2=20
 DURATION2=40
-DURATION2=10
 DURATION2=20
+DURATION2=10
 
 # try to disable traffic (MSGCOUNT == 0 does not work!)
 #MSGRATE=0.0 

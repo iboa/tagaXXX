@@ -148,8 +148,6 @@ do
    echo MASTER=$MYIP >> $TAGA_DIR/config
    echo $ENVIRON_SIMULATION > /tmp/simulationFlag.txt
 
-   let iter=$iter+1
-
    # get the config again in case it has changed
    source $TAGA_DIR/config
 
@@ -161,6 +159,18 @@ do
       echo `date` Main Test Loop Disabled ............
       sleep 5
    done
+
+   while [ $iter -ge $MAX_ITERATIONS ] 
+   do
+      # refresh config in case it has changed
+      source $TAGA_DIR/config
+      echo
+      echo `date` Max Iterations \($iter\) Reached - Disabling ............
+      sleep 5
+   done
+
+   # Increment the iterator
+   let iter=$iter+1
 
    echo
    echo `date` Main Test Loop Enabled ............
@@ -246,6 +256,10 @@ do
 
    # Mid cycle tests
    ./midCycleTests.sh & # run in background/parallel
+
+   # run the variable test
+   echo Executing variable test..... $VARIABLE_TEST
+   ./$VARIABLE_TEST
 
    let i=$DURATION2
    while [ $i -gt 0 ]
