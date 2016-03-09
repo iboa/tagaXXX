@@ -88,8 +88,7 @@ do
    fi
 
    # print the info
-   echo $MY_TIME : $MYIP
-   echo $TGT_TIME : $target
+   echo Target:$target T1: `echo $MY_TIME | cut -c11-29 ` T2: `echo $TGT_TIME | cut -c11-29 ` 
 
    # get the meaty part of the string
    MY_TIME2=`echo $MY_TIME | cut -c18-100 | cut -c1-12`
@@ -107,16 +106,6 @@ do
    # get the delta
    let DELTA=$TGT_TIME4-$MY_TIME4
    let retCode=$?
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -225,8 +214,8 @@ do
           fi
 
           # T1
-          echo ------------
-          echo $TGT_TIME3B - $MY_TIME3B = $DELTA
+#          echo ------------
+#          echo $TGT_TIME3B - $MY_TIME3B = $DELTA
           echo ------------
           echo "$count $TIMESTR 0$DELTA T1:$duration" Target: $target  $description #$count $TIMESTR
           echo ------------
@@ -515,80 +504,6 @@ do
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #   # check validity
 #   if [ $retCode -eq 0 ] ; then
 #     # check validity
@@ -666,28 +581,6 @@ do
 #     echo "Invalid Delta  Delta: (Invalid) (Minute boundaries not supported)" 
 #     echo -----------
 #   fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
