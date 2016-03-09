@@ -318,22 +318,19 @@ do
 
    currentEpoch=`date +%s`
 
-   #dlm temp
    let currentDelta=$currentEpoch-$lastEpoch
    let lastEpoch=$currentEpoch
-   
-   #echo $startEpoch
-   #echo $currentEpoch
    let deltaEpoch=$currentEpoch-$startEpoch
 
-   #let currentAverage=$deltaEpoch/$iter
+   # special handling for iteration 1
+   if [ $iter -eq 1 ]; then
+      # use the delta epoch instead of current delta
+      printableDeltaCum="$printableDeltaCum $deltaEpoch"
+   else 
+      printableDeltaCum="$printableDeltaCum $currentDelta"
+   fi
 
-   printableDeltaCum="$printableDeltaCum $currentDelta"
    printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
-
-#echo YES $printableAverageDeltaCum
-#echo YES $printableAverageDeltaCum
-#echo $printableAverageDeltaCum
 
    #############################################################
    # create the log dir
