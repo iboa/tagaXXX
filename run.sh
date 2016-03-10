@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -13,8 +17,8 @@ do
 
    # run traffic unless simulation only flag is set
    if [ $SIMULATION_ONLY -eq 0 ]; then
-      ssh -l $MYLOGIN_ID $target $TAGA_DIR/tcpdump.sh & 
-      ssh -l $MYLOGIN_ID $target $TAGA_DIR/mgen.sh &
+      ssh -l $MYLOGIN_ID $target $TAGA_DIR/tcpdump.sh $target & 
+      ssh -l $MYLOGIN_ID $target $TAGA_DIR/mgen.sh $target &
    fi
 
 done

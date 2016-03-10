@@ -1,9 +1,14 @@
 #!/bin/bash
 
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
+
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
-echo $MYIP: $0 executing at `date`
+echo $0 $MYIP executing at `date`
 
 #####################################
 # SIMULATE INIT FUNCTION

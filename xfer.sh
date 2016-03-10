@@ -1,8 +1,10 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
-
-echo $TAGA_DIR
 
 for target in $targetList
 do
@@ -16,7 +18,6 @@ do
 
    ssh -l $MYLOGIN_ID $target mkdir -p $TAGA_DIR/code
    scp -r $TAGA_DIR/code/* $MYLOGIN_ID@$target:$TAGA_DIR/code <$TAGA_DIR/passwd.txt
-
 
 done
 

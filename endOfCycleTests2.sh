@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -14,6 +18,7 @@ COMMON_PARAMS="--user=$MYLOGIN_ID --password=$MYPASSWD --batch-mode"
 
 for target in $targetList
 do
+  TEE_FILE=/tmp/endOfCycleTest2_$target.out
   TEE_FILE=/tmp/endOfCycleTest2_$target.out
   echo $COMMAND :`date` : hostname:`hostname` target:$target -------------------------- | tee $TEE_FILE
   $COMMAND --server=$target $COMMON_PARAMS --run-command="list commands" >> $TEE_FILE 
