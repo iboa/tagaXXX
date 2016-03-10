@@ -33,14 +33,14 @@ class Daemon(object):
         message = "XXX: XXX: XXX: XXX: Hello World Marker\n"
         sys.stderr.write(message)
         sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
-        sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
+        #sys.stderr.write(message)
 
         # Do first fork
         self.fork()
@@ -113,11 +113,11 @@ class Daemon(object):
         try:
             pid = os.fork()
             if pid > 0:
-                message = "dlm temp aaaaaaaaaaaaaaaaaaaaaaaaaa pid: %d \n"
+                message = "Starting Daemon pid: %d \n"
                 sys.stderr.write(message % pid)
                 sys.exit(0)
             else:
-                message = "dlm temp bbbbbbbbbbbbbbbbbbbbbbbbbb pid: %d \n"
+                message = "Starting Daemon pid: %d \n"
                 sys.stderr.write(message % pid)
         except OSError as e:
             sys.stderr.write("Fork failed: %d (%s)\n" % (e.errno, e.strerror))
@@ -256,7 +256,7 @@ def main():
     )
 
     if operation == 'start':
-        print("Starting daemon")
+        #print("Starting daemon")
         daemon.start()
         pid = daemon.get_pid()
 

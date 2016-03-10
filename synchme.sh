@@ -1,11 +1,13 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
 MYDIR=`pwd`
-
-echo 
-echo $targetList
+MYDIR=$TAGA_DIR
 
 for target in $targetList
 do
@@ -15,8 +17,6 @@ do
    else
       echo processing, synchronizing $target
       sleep 1
-      ssh -l $MYLOGIN_ID $target date
-      ssh -l $MYLOGIN_ID $target hostname
       # build the source file string
       SCP_SOURCE_STR="code"
       # send the files to the destination
