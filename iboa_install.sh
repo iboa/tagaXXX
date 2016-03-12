@@ -148,6 +148,13 @@ else
    echo "# BEGIN TAGA Exensions are included here                              " >> $IBOA_USER_FILE
    echo "################################################################" >> $IBOA_USER_FILE
    echo "alias run='echo This is a Test'"                                  >> $IBOA_USER_FILE
+   echo "alias x='exit'"                                                   >> $IBOA_USER_FILE
+   echo "alias g='TAGA_DIR=~/scripts/taga; cd \$TAGA_DIR'"                 >> $IBOA_USER_FILE
+   echo "alias trace='g; ./aliasTrace.sh'"                                 >> $IBOA_USER_FILE
+   echo "alias trac='trace'"                                               >> $IBOA_USER_FILE
+   echo "alias tra='trac'"                                                 >> $IBOA_USER_FILE
+   echo "alias tr='tra'"                                                   >> $IBOA_USER_FILE
+   echo "alias t='tr'"                                                     >> $IBOA_USER_FILE
    echo "alias run='TAGA_DIR=~/scripts/taga; \$TAGA_DIR/runLoopWrapper.sh'" >> $IBOA_USER_FILE
    echo "alias mon='TAGA_DIR=~/scripts/taga; touch \$TAGA_DIR/counts.txt; tail -f \$TAGA_DIR/counts.txt'" >> $IBOA_USER_FILE
    echo "alias grem='TAGA_DIR=~/scripts/taga; \$TAGA_DIR/remoteLoginAll.sh'" >> $IBOA_USER_FILE
