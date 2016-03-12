@@ -37,8 +37,8 @@ do
       break
    fi
 
-   echo
-   echo $0 checking $target
+   #echo
+   #echo $0 checking $target
 
    # get the DTS with nanoseconds granularity
    MY_TIME=`date -Ins` 
@@ -88,7 +88,7 @@ do
    fi
 
    # print the info
-   echo Target:$target T1: `echo $MY_TIME | cut -c11-29 ` T2: `echo $TGT_TIME | cut -c11-29 ` 
+  # echo Target:$target T1: `echo $MY_TIME | cut -c11-29 ` T2: `echo $TGT_TIME | cut -c11-29 ` 
 
    # get the meaty part of the string
    MY_TIME2=`echo $MY_TIME | cut -c18-100 | cut -c1-12`
@@ -193,7 +193,7 @@ do
              duration="(X < 1 sec)"
              MILLISECS=`echo $DELTA | cut -c1-3`
              FRACTIONPART=`echo $DELTA | cut -c4`
-             duration="(X > $MILLISECS.$FRACTIONPART msecs) ******* *******" 
+             duration="  $MILLISECS.$FRACTIONPART msecs :: (X > $MILLISECS.$FRACTIONPART msecs) " 
              # pad DELTA value
              DELTA=00$DELTA
              let delay=0
@@ -216,9 +216,10 @@ do
           # T1
 #          echo ------------
 #          echo $TGT_TIME3B - $MY_TIME3B = $DELTA
-          echo ------------
-          echo "$count $TIMESTR 0$DELTA T1:$duration" Target: $target  $description #$count $TIMESTR
-          echo ------------
+          #echo ------------
+          #echo "$count $TIMESTR 0$DELTA $target T1:$duration" Target: $target  $description #$count $TIMESTR
+          echo "$count $TIMESTR Target: $target: T1:$duration" Target: $target  $description #$count $TIMESTR
+          #echo ------------
 
        else
 
