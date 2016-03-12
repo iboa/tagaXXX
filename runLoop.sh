@@ -336,9 +336,9 @@ do
    if [ $iter -eq 1 ]; then
       # use the delta epoch instead of current delta
       #printableDeltaCum="$printableDeltaCum $deltaEpoch"
-      printableDeltaCum="$printableDeltaCum Delta   : "
+      printableDeltaCum="$printableDeltaCum D: "
       #printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
-      printableAverageDeltaCum="$printableAverageDeltaCum AvgDelta: "
+      printableAverageDeltaCum="$printableAverageDeltaCum A: "
    else 
       printableDeltaCum="$printableDeltaCum $currentDelta"
       printableAverageDeltaCum="$printableAverageDeltaCum $currentAvgDelta"
