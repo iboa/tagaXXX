@@ -15,11 +15,11 @@ hostList=`$TAGA_DIR/hostList.sh`
 ALL_TESTS_DISABLED=1 # disable all tests (Testing)
 ALL_TESTS_DISABLED=0 # enable all tests (Normal)
 MAX_ITERATIONS=1       # max iterations (Testing)
-MAX_ITERATIONS=1000000 # max iterations (Normal)
 MAX_ITERATIONS=2       # max iterations (Testing)
 MAX_ITERATIONS=4       # max iterations (Testing)
 MAX_ITERATIONS=8       # max iterations (Testing)
 MAX_ITERATIONS=20       # max iterations (Testing)
+MAX_ITERATIONS=1000000 # max iterations (Normal)
 STEPWISE_ITERATIONS=1  # Testing
 STEPWISE_ITERATIONS=0  # Normal
 
@@ -249,9 +249,10 @@ MSGLEN=94
 let DURATION1=$MSGCOUNT/$MSGRATE
 #echo $DURATION1
 DURATION2=20
-DURATION2=40
 DURATION2=20
 DURATION2=10
+DURATION2=40
+DURATION2=60
 
 # try to disable traffic (MSGCOUNT == 0 does not work!)
 #MSGRATE=0.0 
