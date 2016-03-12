@@ -9,6 +9,8 @@ source $TAGA_DIR/config
 # get the md5sum of the targetlist config so we know if it changes
 configMd5sum=`md5sum $TAGA_DIR/targetList.sh | cut -d" " -f 1`
 
+echo; echo $0 : $MYIP :  executing at `date`; echo
+
 # set the flag to enter the loop
 let configChanged=1
 
@@ -218,7 +220,8 @@ do
 #          echo $TGT_TIME3B - $MY_TIME3B = $DELTA
           #echo ------------
           #echo "$count $TIMESTR 0$DELTA $target T1:$duration" Target: $target  $description #$count $TIMESTR
-          echo "$count $TIMESTR Target: $target: T1:$duration" Target: $target  $description #$count $TIMESTR
+          #echo "$count $TIMESTR Target: $target: T1:$duration" Target: $target  $description #$count $TIMESTR
+          echo "TAGA:Target:$target: $duration" $description #$count $TIMESTR
           #echo ------------
 
        else

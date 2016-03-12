@@ -6,7 +6,7 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
-echo $0 : $MYIP :  executing at `date`
+echo; echo $0 : $MYIP :  executing at `date`; echo
 
 # issue confirmation prompt
 ./confirm.sh

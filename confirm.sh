@@ -10,7 +10,7 @@ echo
 echo Please Confirm to Proceed.
 echo
 echo Confirm? \(y/n\) ?
-#echo
+echo
 
 read input
 
