@@ -219,11 +219,7 @@ do
 #          echo ------------
 #          echo $TGT_TIME3B - $MY_TIME3B = $DELTA
           #echo ------------
-          #echo "$count $TIMESTR 0$DELTA $target T1:$duration" Target: $target  $description #$count $TIMESTR
-          #echo "$count $TIMESTR Target: $target: T1:$duration" Target: $target  $description #$count $TIMESTR
-          echo "TAGA:Target:$target: $duration" $description #$count $TIMESTR
-          #echo ------------
-
+          echo "`./iboa_padded_echo.sh \"TAGA:Target:$target:\" 29` $duration $description"
        else
 
           echo MINUTES: $MINUTES : Minute Boundary Encountered
