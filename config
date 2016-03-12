@@ -75,6 +75,7 @@ MYPASSWD=YourPasswordGoesHere
 COMMAND=YourPrimaryCommandNameGoesHere
 PROTO_UNDER_TEST=YourProtocolUnderTestGoesHere
 
+
 DAEMON1_IP=192.168.43.69
 DAEMON2_IP=192.168.43.124
 
@@ -315,9 +316,13 @@ for ip in $MYIPCANDIDATES; do if echo $targetList  |  \
 #echo CANDIDATES: $MYIPCANDIDATES
 #echo MYIP: $MYIP
 
+# auto configure the target count
+TARGET_COUNT=`echo $targetList | wc -w`  # same as targetCount below
+targetCount=`./targetList.sh | wc -w` # same as TARGET_COUNT above
+
 # Other (One) Target Config
-# other list configured automatically based on MYIP
-TARGET_COUNT=`echo $targetList | wc -w` 
+
+# OTHERS (automatic) config
 if [ $OTHERS == "single" ] ; then
    # single (first) other target in other list
    if [ $TARGET_COUNT -gt 2 ]; then OTHER_LIST=`echo $targetList \
@@ -327,6 +332,8 @@ else
    # multiple (all) other targets in other list
    OTHER_LIST=`echo $targetList | sed s/$MYIP//g` 
 fi
+
+
 #echo $OTHER_LIST
 
 ##############################################
@@ -347,4 +354,4 @@ TEST_DESCRIPTION="taga_anycast"
 # Master Machine
 # run time insert from runLoop.sh
 ##############################################
-MASTER=localhost
+MASTER=192.168.43.124
