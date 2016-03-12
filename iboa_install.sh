@@ -48,6 +48,10 @@ else
    echo \#alias aa=aag                                                          >> $IBOA_FILE
    echo alias aa=aau                                                            >> $IBOA_FILE
 
+   # create the 'goto taga dir' ('g') and 'trace alias' ('ta') aliases
+   echo "alias g='TAGA_DIR=~/scripts/taga; cd \$TAGA_DIR'"                      >> $IBOA_FILE
+   echo "alias ta='g; ./aliasTrace.sh'"                                         >> $IBOA_FILE
+
    # create the insertAliasUser function for the 'install alias user' (iau) alias
    echo "function __insertAliasUser() {"                                         >> $IBOA_FILE
    echo "  if [ \$# -ge 1 ]; then"                                               >> $IBOA_FILE
