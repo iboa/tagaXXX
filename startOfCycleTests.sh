@@ -1,3 +1,7 @@
+#####################################################
+# Copyright 2016 IBOA Corp
+# All Rights Reserved
+#####################################################
 
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
@@ -18,7 +22,6 @@ do
   $COMMAND --server=$target $COMMON_PARAMS --run-command="list commands" >> $TEE_FILE 
   $COMMAND --server=$target $COMMON_PARAMS --run-command="get-config --source=running" >> $TEE_FILE 
   $COMMAND --server=$target $COMMON_PARAMS --run-command="get-my-session" >> $TEE_FILE 
-  $COMMAND --server=$target $COMMON_PARAMS --run-command="get-schema --identifier=toaster" >> $TEE_FILE 
 
 done
 
