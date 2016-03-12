@@ -318,7 +318,7 @@ for ip in $MYIPCANDIDATES; do if echo $targetList  |  \
 
 # auto configure the target count
 TARGET_COUNT=`echo $targetList | wc -w`  # same as targetCount below
-targetCount=`./targetList.sh | wc -w` # same as TARGET_COUNT above
+targetCount=`$TAGA_DIR/targetList.sh | wc -w` # same as TARGET_COUNT above
 
 # Other (One) Target Config
 
