@@ -6,26 +6,19 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
+PADVAR="."
+PADVAR=";"
+PADVAR=";"
+PADVAR=":"
+PADVAR="x"
+PADVAR=" "
+
 if [ $# -ne 2 ]; then
     echo $0: Error, two params required!
    echo "   required param 1: output param to be padded"
    echo "   required param 2: size of output after padding"
    exit 255
 fi
-
-#echo; echo $0 : $MYIP :  executing at `date`; echo
-
-## issue confirmation prompt
-#./confirm.sh
-## check the response
-#let response=$?
-#if [ $response -eq 1 ]; then
-#  echo; echo Confirmed, $0 continuing....; echo
-#else
-#  echo; echo Not Confirmed, $0 exiting with no action...; echo
-#  exit
-#fi
-#
 
 outputParam=$1
 printlen=$2
@@ -37,7 +30,7 @@ let padlen=$printlen-$buflen
 let i=$padlen
 while [ $i -gt 0 ];
 do
-  outputParam="$outputParam."
+  outputParam="$outputParam$PADVAR"
   let i=$i-1
 done
 
