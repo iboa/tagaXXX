@@ -41,6 +41,7 @@ if [ $CONFIRM_REQD -eq 1 ] ; then
    fi
 fi
 
+
 # source the aliases
 echo source $ALIAS_FILE; echo
 source $ALIAS_FILE
@@ -53,6 +54,9 @@ aliasNext=`alias $1`
 RET=$?
 
 if [ $RET -eq 0 ]; then
+
+   echo 1: $1; #echo
+
    echo $i: $aliasNext
    aliasNext=`echo $aliasNext | cut -d\' -f 2`
 else
@@ -61,17 +65,22 @@ else
    exit
 fi 
 
+
 # iterate until we hit the end of the trace
 while [ $RET -eq 0 ] 
 do
    # increment the count
    let i=$i+1
-   echo $aliasNext
+
+#   echo $aliasNext
+
+   echo; echo $i: $aliasNext
+
    #aliasNext=`alias $aliasNext 2>/dev/null` 2>/dev/null
    aliasNext=`alias $aliasNext 2>/dev/null` 
    RET=$?
    if [ $RET -eq 0 ]; then
-      echo
+      #echo
       echo $i: $aliasNext
       aliasNext=`echo $aliasNext | cut -d\' -f 2`
    else
