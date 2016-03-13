@@ -274,7 +274,7 @@ MYMCAST_ADDR="225.0.0.25"
 MYMCAST_PORT=8888
 
 # Ports
-SOURCEPORT=7760
+SOURCEPORT=8880
 PORTBASE=7770
 
 # Narrow display is 10 nodes, wide display is 20 nodes
