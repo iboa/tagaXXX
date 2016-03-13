@@ -20,9 +20,8 @@ do
    # send the files to the destination
    scp $SCP_SOURCE_STR $MYLOGIN_ID@$target:$TAGA_DIR <$TAGA_DIR/passwd.txt
 
-   # synch bashrc
-   scp ~/.bashrc* $MYLOGIN_ID@$target:~/ <$TAGA_DIR/passwd.txt
-
+   # synch bashrc.iboa files
+   #scp ~/.bashrc.iboa* $MYLOGIN_ID@$target:~/ <$TAGA_DIR/passwd.txt
 
    # clean up old OBE scripts (run once per file in all environs)
    # but check the flag first
