@@ -10,18 +10,27 @@ CONFIRM_REQD=1
 
 # list of things to strip
 STRIP_LIST=`cat $TAGA_DIR/stripList.txt`
-
 ALIAS_FILE=$TAGA_DIR/aliasList.txt
 ALIAS_STRIPPED_FILE=$TAGA_DIR/aliasListStripped.txt
 
-# validate input
 echo; echo $0 : $MYIP :  executing at `date`; echo
+
+echo;echo; echo StipList... `ls $TAGA_DIR/stripList.txt 2>/dev/null`
+
+# validate input
 echo
 echo Keywords :: [ $STRIP_LIST ] 
 echo
 echo NOTE: The keywords above will be stripped from $ALIAS_FILE 
 echo and a new resultant file written to $ALIAS_STRIPPED_FILE
 ./confirm.sh
+let response=$?
+if [ $response -eq 1 ]; then
+  echo; echo Confirmed, $0 continuing....; echo
+else
+  echo; echo Not Confirmed, $0 exiting with no action...; echo
+  exit
+fi
 
 ##########################################################
 # note, prior to running this script, # run the following: 
