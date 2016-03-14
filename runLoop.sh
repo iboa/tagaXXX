@@ -7,18 +7,20 @@ TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
 # basic sanity check, to ensure password updated etc
-./basicSanityCheck.sh
+$TAGA_DIR/basicSanityCheck.sh
 if [ $? -eq 255 ]; then
   echo Basic Sanith Check Failed - see warning above - $0 Exiting...
   echo
   exit 255
 fi
 
-START_STATS=`./adminstats.sh` 
-let TX_STATS=`./adminstats.sh TXonly`
-let RX_STATS=`./adminstats.sh RXonly`
+START_STATS=`$TAGA_DIR/adminstats.sh` 
+let TX_STATS=`$TAGA_DIR/adminstats.sh TXonly`
+let RX_STATS=`$TAGA_DIR/adminstats.sh RXonly`
 let START_TX_STATS=$TX_STATS
 let START_RX_STATS=$RX_STATS
+#echo TX_STATS:$TX_STATS
+#echo RX_STATS:$RX_STATS
 
 
 #########################################
@@ -62,24 +64,24 @@ echo;echo
 
 # check time synch if enabled
 if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
-  ./timeSynchCheck.sh
+  $TAGA_DIR/timeSynchCheck.sh
 fi
 #sleep 1
 
 # probe if enabled
 if [ $PROBE_ENABLED -eq 1 ]; then
-  ./probe.sh
+  $TAGA_DIR/probe.sh
 fi
 
 # get ping times if enabled
 if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
-  ./pingTimes.sh
+  $TAGA_DIR/pingTimes.sh
 fi
 #sleep 1
 
 # get resource usage if enabled
 if [ $RESOURCE_MON_ENABLED -eq 1 ]; then
-  ./wrapResourceUsage.sh
+  $TAGA_DIR/wrapResourceUsage.sh
 fi
 sleep 1
 
@@ -87,11 +89,11 @@ sleep 1
 # stop the Simulation Always 
 if [ true ] ; then
 #if [ $STOP_SIMULATION -eq 1 ] ; then
-  ./stopXXX.sh
+  $TAGA_DIR/stopXXX.sh
 fi
 
 # stop the Simulation and Data Generation in case it is still running somewhere
-./runStop.sh
+$TAGA_DIR/runStop.sh
 
 # do a complete synch at least once
 # 10 mar 2016, eliminate the synch due to ssh hiccups
@@ -124,18 +126,18 @@ do
 
    # check time synch if enabled
    if [ $TIME_SYNCH_CHECK_ENABLED -eq 1 ]; then
-     ./timeSynchCheck.sh
+     $TAGA_DIR/timeSynchCheck.sh
    fi
    #sleep 1
 
    # probe if enabled
    if [ $PROBE_ENABLED -eq 1 ]; then
-     ./probe.sh
+     $TAGA_DIR/probe.sh
    fi
 
    # get ping times if enabled
    if [ $PING_TIME_CHECK_ENABLED -eq 1 ]; then
-     ./pingTimes.sh
+     $TAGA_DIR/pingTimes.sh
    fi
    #sleep 1
 
@@ -144,7 +146,7 @@ do
       let mod=$k%$RESOURCE_DISPLAY_MODULUS
       if [ $mod -eq 0 ] ; then
         echo k:$k
-        ./wrapResourceUsage.sh
+        $TAGA_DIR/wrapResourceUsage.sh
       fi
    fi
    #sleep 1
@@ -205,17 +207,17 @@ do
    echo `date` Regenerating HostToIpMap File ............
 
    # build the map each iteration
-   ./createHostToIpMap.sh
+   $TAGA_DIR/createHostToIpMap.sh
 
    echo `date` Regenerating HostToIpMap File ............ DONE
    echo
 
    if [ $CONTINUOUS_SYNCH -eq 1 ]; then
      # synch everything 
-     ./synch.sh
+     $TAGA_DIR/synch.sh
    else
      # synch config only
-     ./synchConfig.sh
+     $TAGA_DIR/synchConfig.sh
    fi
 
    # baseline the aggregate log file
@@ -232,17 +234,17 @@ do
    if [ $START_SIMULATION -eq 1 ] ; then
 
      # Init the sims (cleanup old files/sockets)
-     ./simulateInit.sh
+     $TAGA_DIR/simulateInit.sh
 
      # Init the selected sims (cleanup old files/sockets)
      # XXX RUN SCRIPT
      if [ $XXX_ON -eq 1 ]; then
-       ./runXXX.sh
+       $TAGA_DIR/runXXX.sh
      fi
    fi
 
    # MAIN RUN SCRIPT (primary sim server and traffic)
-   ./run.sh
+   $TAGA_DIR/run.sh
 
    # Start of cycle tests
    #sleep $SERVER_INIT_DELAY
@@ -263,7 +265,7 @@ do
    #sleep 2
 
 
-   ./startOfCycleTests.sh & # run in background/parallel
+   $TAGA_DIR/startOfCycleTests.sh & # run in background/parallel
 
    let i=$DURATION1
    while [ $i -gt 0 ]
@@ -275,11 +277,11 @@ do
    done
 
    # Mid cycle tests
-   ./midCycleTests.sh & # run in background/parallel
+   $TAGA_DIR/midCycleTests.sh & # run in background/parallel
 
    # run the variable test
    echo Executing variable test..... $VARIABLE_TEST
-   ./$VARIABLE_TEST
+   $TAGA_DIR/$VARIABLE_TEST
 
    let i=$DURATION2
    while [ $i -gt 0 ]
@@ -295,16 +297,16 @@ do
    #####################################################
 
    # End of cycle tests
-   ./endOfCycleTests.sh
-   ./endOfCycleTests2.sh
-   ./endOfCycleTests3.sh
+   $TAGA_DIR/endOfCycleTests.sh
+   $TAGA_DIR/endOfCycleTests2.sh
+   $TAGA_DIR/endOfCycleTests3.sh
 
    #####################################################
    # Client-Side Specialized Test Stimulations
    #####################################################
 
    if [ $XXX_ON -eq 1 ]; then
-     ./testXXX.sh
+     $TAGA_DIR/testXXX.sh
    fi
  
    #sleep 5
@@ -312,15 +314,15 @@ do
 
    # stop the Simulation each iteration 
    if [ $STOP_SIMULATION -eq 1 ] ; then
-      ./stopXXX.sh
+      $TAGA_DIR/stopXXX.sh
    fi
 
    # stop the Remaining Simulation and Data Generation
-   ./runStop.sh
+   $TAGA_DIR/runStop.sh
 
    # collect and clean
-   ./collect.sh $outputDir
-   ./cleanAll.sh $outputDir
+   $TAGA_DIR/collect.sh $outputDir
+   $TAGA_DIR/cleanAll.sh $outputDir
 
    # remove old and put current data in generic output directory
    rm -rf $OUTPUT_DIR/output
@@ -431,8 +433,8 @@ do
 
    # count and sort and display results matrix
    # note, startDTG must be last param since includes spaces
-   ./countSends.sh $outputDir $iter $startTime $currentDelta $deltaEpoch $startDTG
-   ./countReceives.sh $outputDir $iter $startTime $startDTG 
+   $TAGA_DIR/countSends.sh $outputDir $iter $startTime $currentDelta $deltaEpoch $startDTG
+   $TAGA_DIR/countReceives.sh $outputDir $iter $startTime $startDTG 
 
    for i in 1 2 3 4 5 6 # 7 8 9 10 11
    do
@@ -455,64 +457,11 @@ do
    let DELTA_TX_STATS=$CURRENT_TX_STATS-$START_TX_STATS
    let DELTA_RX_STATS=$CURRENT_RX_STATS-$START_RX_STATS
 
-   #echo 0
-   #echo $DELTA_TX_STATS
-   #echo $DELTA_RX_STATS
-   #echo 0b
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   #echo here
-   #echo $DELTA_RX_STATS
-   #echo here2
+# GitHub Note: Consider refactoring the below four big blocks into a single script file
+# .. several input params will be required
 
    wordlen=`echo $DELTA_RX_STATS | awk '{print length($0)}'`
-   #echo wordlen: $wordlen
 
    if [ $wordlen -eq 8 ]; then
       let MBytes=$DELTA_RX_STATS*10 # multiply by 10 to get fraction
@@ -543,11 +492,7 @@ do
       echo "TAGA:Iter:$iter DELTA_RX_STATS:      $DELTA_RX_STATS" 
    fi
 
-
-
-
    wordlen=`echo $DELTA_TX_STATS | awk '{print length($0)}'`
-   #echo wordlen: $wordlen
 
    if [ $wordlen -eq 8 ]; then
       let MBytes=$DELTA_TX_STATS*10 # multiply by 10 to get fraction
@@ -579,46 +524,9 @@ do
    fi
 
 
-
-
-
-#   if [ $wordlen -eq 8 ]; then
-#      let MBytes=$DELTA_RX_STATS*10 # multiply by 10 to get fraction
-#      let MBytes=$MBytes/1000000
-#      megabytePrint=`echo $MBytes | cut -c1-2`.`echo $MBytes | cut -c3`
-#      echo TAGA:Iter:$iter DELTA_RX_STATS: $DELTA_RX_STATS \($megabytePrint MB\)
-#   elif [ $wordlen -eq 7 ]; then
-#      let MBytes=$DELTA_RX_STATS*10 # multiply by 10 to get fraction
-#      let MBytes=$MBytes/1000000
-#      megabytePrint=`echo $MBytes | cut -c1`.`echo $MBytes | cut -c2`
-#      echo TAGA:Iter:$iter DELTA_RX_STATS: $DELTA_RX_STATS \($megabytePrint MB\)
-#   elif [ $wordlen -eq 6 ]; then
-#      let KBytes=$DELTA_RX_STATS*10 # multiply by 10 to get fraction
-#      let KBytes=$KBytes/1000
-#      kilobytePrint=`echo $KBytes | cut -c1-3`.`echo $KBytes | cut -c4`
-#      echo TAGA:Iter:$iter DELTA_RX_STATS: $DELTA_RX_STATS \($kilobytePrint KB\)
-#   elif [ $wordlen -eq 5 ]; then
-#      let KBytes=$DELTA_RX_STATS*10 # multiply by 10 to get fraction
-#      let KBytes=$KBytes/1000
-#      kilobytePrint=`echo $KBytes | cut -c1-2`.`echo $KBytes | cut -c3-4`
-#      echo TAGA:Iter:$iter DELTA_RX_STATS: $DELTA_RX_STATS \($kilobytePrint KB\)
-#   elif [ $wordlen -eq 4 ]; then
-#      let KBytes=$DELTA_RX_STATS*10 # multiply by 10 to get fraction
-#      let KBytes=$KBytes/1000
-#      kilobytePrint=`echo $KBytes | cut -c1`.`echo $KBytes | cut -c2-4`
-#   else
-#   #   echo 7b
-#      echo TAGA:Iter:$iter DELTA_RX_STATS: $DELTA_RX_STATS
-#   fi
-
-
    let DELTA_RX_STATS_ITER=$DELTA_RX_STATS/$iter
 
-   #echo 10
-   #echo $DELTA_RX_STATS_ITER
-
    wordlen=`echo $DELTA_RX_STATS_ITER | awk '{print length($0)}'`
-   #echo DeltaRxStatusIter wordlen: $wordlen
    if [ $wordlen -eq 8 ]; then
       let MBytes=$DELTA_RX_STATS_ITER*10 # multiply by 10 to get fraction
       let MBytes=$MBytes/1000000
@@ -649,22 +557,9 @@ do
       echo TAGA:Iter:$iter DELTA_RX_STATS_ITER: $DELTA_RX_STATS_ITER
    fi
 
-
-
-
-
-
-
-
-
-
    let DELTA_TX_STATS_ITER=$DELTA_TX_STATS/$iter
 
-   #echo 9
-   #echo $DELTA_TX_STATS_ITER
-
    wordlen=`echo $DELTA_TX_STATS_ITER | awk '{print length($0)}'`
-   #echo DeltaTxStatusIter wordlen: $wordlen
    if [ $wordlen -eq 8 ]; then
       let MBytes=$DELTA_TX_STATS_ITER*10 # multiply by 10 to get fraction
       let MBytes=$MBytes/1000000
@@ -691,13 +586,8 @@ do
       kilobytePrint=`echo $KBytes | cut -c1`.`echo $KBytes | cut -c2-4`
       echo "TAGA:Iter:$iter DELTA_TX_STATS_ITER: $DELTA_TX_STATS_ITER ($kilobytePrint KB TX per Iter)"
    else
-   #   echo 7a
       echo TAGA:Iter:$iter DELTA_TX_STATS_ITER: $DELTA_TX_STATS_ITER
    fi
-
-
-
-
 
    sleep 5
 
