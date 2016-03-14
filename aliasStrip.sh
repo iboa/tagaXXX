@@ -6,28 +6,22 @@
 TAGA_DIR=~/scripts/taga
 source $TAGA_DIR/config
 
+CONFIRM_REQD=1
+
 # list of things to strip
 STRIP_LIST=`cat $TAGA_DIR/stripList.txt`
 
 ALIAS_FILE=$TAGA_DIR/aliasList.txt
 ALIAS_STRIPPED_FILE=$TAGA_DIR/aliasListStripped.txt
-ALIAS_FILE=$TAGA_DIR/aliasList.txt
-ALIAS_STRIPPED_FILE=$TAGA_DIR/aliasListStripped.txt
 
 # validate input
-#if [ $# -eq 1 ]; then
-   echo; echo $0 : $MYIP :  executing at `date`; echo
-   echo
-   echo Keywords :: [ $STRIP_LIST ] 
-   echo
-   echo NOTE: The keywords above will be stripped from $ALIAS_FILE 
-   echo and a new resultant file written to $ALIAS_STRIPPED_FILE
-   # issue confirmation prompt
-   ./confirm.sh
-#else
-#   echo; echo $0 requires one parameter, exiting with no action...; echo
-#   exit
-#fi
+echo; echo $0 : $MYIP :  executing at `date`; echo
+echo
+echo Keywords :: [ $STRIP_LIST ] 
+echo
+echo NOTE: The keywords above will be stripped from $ALIAS_FILE 
+echo and a new resultant file written to $ALIAS_STRIPPED_FILE
+./confirm.sh
 
 ##########################################################
 # note, prior to running this script, # run the following: 
@@ -60,4 +54,6 @@ do
    cat $ALIAS_STRIPPED_FILE | grep -i -v $item > /tmp/tmp.txt
    cp /tmp/tmp.txt $ALIAS_STRIPPED_FILE
 done
+
+echo; echo Created: $ALIAS_STRIPPED_FILE ; echo
 
