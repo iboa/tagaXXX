@@ -25,6 +25,7 @@ do
    fi
 done
 
-echo $0 returned to self... $0 complete!; echo
+echo $0 returned to self...; echo
+echo $0 complete!; echo
 
 
