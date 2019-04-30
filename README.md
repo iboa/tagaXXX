@@ -1,11 +1,10 @@
-# tagaXXX
+
 # tagaPaige
 
-This repository is not maintained.
+# Please see dmeekabc/tagaProducts repository
 
-Please see dmeekabc/tagaProductized for maintained versions.
+The tagaProducts repository is the active public repository as of 29 April 2019.
 
-Thank you.
+Also, if you have docker installed, run the following for TAGA docker container:
 
-Darrin Meek
-IBOA CORP 2016
+$ sudo docker run -it dmeekabc/taga
